@@ -1,1 +1,2 @@
-# aurex
+# Aurex
+An intuitive trading application
