@@ -1,0 +1,89 @@
+:root {
+  /* Default Theme */
+  --bg-gradient: linear-gradient(180deg, #ebeddf, #333b30);
+  --color-text: white;
+  --color-navbar-bg: #e0e0e0;
+  --color-link: #222;
+  --color-link-hover-bg: #ccc;
+
+  /* Transitions */
+  --transition-fast: background-color 0.3s ease, color 0.3s ease;
+}
+
+body.dark-mode {
+  --bg-gradient: linear-gradient(180deg, #00134a, #373977);
+  --color-text: white;
+  --color-navbar-bg: #1e1e1e;
+  --color-link: #f1f1f1;
+  --color-link-hover-bg: #333;
+}
+
+/* Responsive Design: Mobile */
+body {
+  font-family: 'Roboto Regular';
+  font-size: 1rem;
+  margin: 0;
+  padding: 0;
+  background-image: var(--bg-gradient);
+  color: var(--color-text);
+}
+
+/* Responsive Design: Tablet */
+@media (min-width: 768px) {
+  body {
+    
+  }
+}
+
+/* Responsive Design: Desktop */
+@media (min-width: 1024px) {
+  body {
+    
+  }
+}
+
+/* .container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
+  box-sizing: border-box;
+} */
+
+/* Typography */
+h1, h2, h3, h4, h5, h6 {
+  margin: 0 0 1rem 0;
+  line-height: 1.2;
+}
+
+.custom-navbar {
+  color: var(--color-link);
+  height: 3rem;
+  font-variant: all-small-caps;
+  letter-spacing: 1px;
+  transition: var(--transition-fast);
+}
+
+.custom-navbar .navbar-brand,
+.custom-navbar .nav-link {
+  color: var(--color-link);
+  transition: var(--transition-fast);
+}
+
+.custom-navbar .nav-link:hover {
+  background-color: var(--color-link-hover-bg);
+}
+
+.nav-link {
+  border-radius: 0.75rem;
+  transition: var(--transition-fast);
+}
+
+.default-container {
+  height: 100vh;
+  width: 100%;
+}
+
+.main-content {
+  padding: 3rem 0 0 0;
+}
