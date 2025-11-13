@@ -2,7 +2,7 @@ import React from 'react';
 
 const Faq: React.FC = () => {
   return (
-    <div className='container-fluid default-container' id='faq'>
+    <div className="container-fluid">
       <h1>FAQ</h1>
     </div>
   );
