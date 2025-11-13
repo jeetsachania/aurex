@@ -1,9 +1,22 @@
-import React from 'react';
+import React from "react";
 
 const Home: React.FC = () => {
   return (
-    <div className='container-fluid main-content' id='home'>
-      <h1>Home</h1>
+    <div className="home hero">
+      <div className="hero-content">
+        <h1>
+          POWERFUL TRADING.<span className="line-break"></span> ZERO HASSLE.
+        </h1>
+        <button
+          className="custom-button rounded-pill"
+          onClick={() => alert("Get Started Clicked!")}
+        >
+          OPEN YOUR ACCOUNT NOW
+        </button>
+        <p className="subtext">
+          WHEN YOU INVEST, YOUR CAPITAL IS AT RISK.
+        </p>
+      </div>
     </div>
   );
 };
