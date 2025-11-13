@@ -1,0 +1,11 @@
+.pricing .custom-button {
+  font-family: 'Consolas';
+}
+
+.pricing .card-subtext {
+  font-size: 12px;
+}
+
+.pricing .limited-feature {
+  color: var(--color-danger);
+}

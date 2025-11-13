@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400..900&display=swap');
+
 @font-face {
   font-family: 'Roboto Regular';
   src: url('../assets/fonts/Roboto/static/Roboto-Regular.ttf');
@@ -11,4 +13,16 @@
 @font-face {
   font-family: 'Lexend Zetta Regular';
   src: url('../assets/fonts/Lexend_Peta/static/LexendPeta-Regular.ttf');
+}
+
+.custom-header {
+  font-family: 'Orbitron';
+  letter-spacing: var(--default-letter-spacing);
+}
+
+.subtext {
+  font-family: 'Consolas';
+  font-size: 0.8rem;
+  margin: 1rem 0;
+  color: var(--color-text-grey);
 }

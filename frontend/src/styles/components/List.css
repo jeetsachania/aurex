@@ -1,0 +1,36 @@
+.custom-list li {
+  font-family: 'Orbitron';
+}
+
+.custom-list-group-item {
+  font-family: 'Consolas';
+  background: none;
+}
+
+.custom-top-border.list-group {
+  position: relative;
+}
+
+.custom-top-border.list-group::before {
+  content: '';
+  display: block;
+  height: 5px;
+  width: 95%;
+  background-color: var(--color-accent-primary);
+  margin: 0 auto;
+  border-radius: 1rem;
+}
+
+.custom-list-group-item:not(:last-child) {
+  padding-bottom: 0.25rem;
+}
+
+.custom-top-border.list-group,
+.custom-list-group-item {
+  border: none;
+}
+
+.custom-list li,
+.custom-list-group-item {
+  letter-spacing: var(--default-letter-spacing);
+}

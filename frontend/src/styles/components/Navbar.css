@@ -1,0 +1,60 @@
+.custom-navbar {
+  color: var(--color-link);
+  font-family: 'Orbitron';
+  height: 5rem;
+  letter-spacing: var(--default-letter-spacing);
+  transition: var(--transition-smooth);
+  background-color: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(5px);
+}
+
+.custom-navbar .navbar-brand,
+.custom-navbar .nav-link {
+  color: var(--color-link);
+  transition: var(--transition-smooth);
+}
+
+.custom-navbar .custom-button {
+  font-family: 'Orbitron';
+}
+
+.nav-link {
+  text-decoration: none;
+  position: relative;
+}
+
+#theme-toggle:hover {
+  color: var(--color-accent-primary);
+}
+
+.nav-link:not(#theme-toggle):not(.custom-button)::before,
+.nav-link:not(#theme-toggle):not(.custom-button)::after {
+  content: "";
+  position: absolute;
+  display: block;
+  border: 0 solid transparent;
+  width: 0%;
+  height: 0%;
+  transition: all 0.3s ease;
+}
+
+.nav-link:not(#theme-toggle):not(.custom-button)::after {
+  top: 0;
+  left: 0;
+  border-top: 2px solid transparent;
+  border-left: 2px solid transparent;
+}
+
+.nav-link:not(#theme-toggle):not(.custom-button)::before {
+  right: 0;
+  bottom: 0;
+  border-bottom: 2px solid transparent;
+  border-right: 2px solid transparent;
+}
+
+.nav-link:not(#theme-toggle):not(.custom-button):hover::before,
+.nav-link:not(#theme-toggle):not(.custom-button):hover::after {
+  width: 10px;
+  height: 10px;
+  border-color: var(--color-accent-primary);
+}

@@ -1,0 +1,22 @@
+.footer {
+  font-family: 'Orbitron';
+  letter-spacing: var(--default-letter-spacing);
+}
+
+.footer li a {
+  color: var(--color-text);
+  transition: var(--transition-smooth);
+}
+
+.footer li a:hover {
+  color: var(--color-button-primary);
+}
+
+.footer .social-icon {
+  color: var(--color-text);
+  transition: var(--transition-smooth);
+}
+
+.footer .social-icon:hover {
+  color: var(--color-accent-primary);
+}

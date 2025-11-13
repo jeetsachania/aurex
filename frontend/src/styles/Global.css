@@ -1,89 +1,117 @@
+@import url('https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css');
+
 :root {
-  /* Default Theme */
-  --bg-gradient: linear-gradient(180deg, #ebeddf, #333b30);
-  --color-text: white;
-  --color-navbar-bg: #e0e0e0;
-  --color-link: #222;
-  --color-link-hover-bg: #ccc;
+  /* Default Theme (Dark Mode) */
+  --bg-gradient: linear-gradient(180deg, #0D1117, #1E1E2F);
+  --bg-color: #080b15;
+  /* --bg-color: #00134a; */
+  /* --bg-color: #0D1117; */
+  /* --bg-color: #030810; */
+  /* --bg-color: #080b15; */
+  --color-text: #EAEAEA;
+  --color-text-grey: #A0A0A0;
+  --color-navbar-bg: #00000000;
+  --color-link: #FFFFFF;
+  --color-link-hover-bg: #37373E;
+  --color-button-primary: #6511FF;
+  --color-button-hover: #7C27FF;
+  --color-success: #00C853;
+  --color-danger: #FF3B30;
+  --color-accent-primary: rgb(101, 17, 255);
+  --color-accent-secondary: #11FF65;
+  --color-accent-light: rgb(188, 149, 250);
+  --color-accent-light-soft: #E0E0E0;
+  --color-hover-shadow: 101, 17, 255;
+
+  /* Default Margin, Padding & Spacing */
+  --default-letter-spacing: 1px;
 
   /* Transitions */
-  --transition-fast: background-color 0.3s ease, color 0.3s ease;
+  --transition-smooth: background-color 0.5s ease, color 0.5s ease;
 }
 
-body.dark-mode {
-  --bg-gradient: linear-gradient(180deg, #00134a, #373977);
-  --color-text: white;
-  --color-navbar-bg: #1e1e1e;
-  --color-link: #f1f1f1;
-  --color-link-hover-bg: #333;
-}
+/* Responsive Design: Tablet - Desktop */
+@media (min-width: 768px) and (max-width: 1023px) {
+  .hero h1 {
+    font-size: 3rem;
+  }
 
-/* Responsive Design: Mobile */
-body {
-  font-family: 'Roboto Regular';
-  font-size: 1rem;
-  margin: 0;
-  padding: 0;
-  background-image: var(--bg-gradient);
-  color: var(--color-text);
-}
+  .hero p {
+    font-size: 0.9rem;
+  }
 
-/* Responsive Design: Tablet */
-@media (min-width: 768px) {
-  body {
-    
+  .hero button {
+    font-size: 1.2rem;
+  }
+
+  .line-break {
+    display: block;
   }
 }
 
 /* Responsive Design: Desktop */
 @media (min-width: 1024px) {
-  body {
-    
+  .hero h1 {
+    font-size: 4rem;
+  }
+
+  .hero p {
+    font-size: 1rem;
+  }
+
+  .hero button {
+    font-size: 1.5rem;
+  }
+
+  .line-break {
+    display: none;
   }
 }
 
-/* .container {
-  width: 100%;
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 1rem;
-  box-sizing: border-box;
-} */
-
-/* Typography */
-h1, h2, h3, h4, h5, h6 {
-  margin: 0 0 1rem 0;
-  line-height: 1.2;
+/* Responsive Design: Mobile First */
+body {
+  font-family: 'Roboto Regular', sans-serif;
+  font-size: 1rem;
+  margin: 0;
+  padding: 0;
+  background-color: var(--bg-color);
+  color: var(--color-text);
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  min-height: 100vh;
+  transition: none;
 }
 
-.custom-navbar {
-  color: var(--color-link);
-  height: 3rem;
-  font-variant: all-small-caps;
-  letter-spacing: 1px;
-  transition: var(--transition-fast);
+body.theme-transition {
+  transition: var(--transition-smooth);
 }
 
-.custom-navbar .navbar-brand,
-.custom-navbar .nav-link {
-  color: var(--color-link);
-  transition: var(--transition-fast);
+body.light-mode {
+  /* Light Mode Theme */
+  --bg-gradient: linear-gradient(180deg, #F5F6FA, #E0E0E0);
+  --bg-color: #f0f0f0;
+  --color-text: #1F1F1F;
+  --color-text-grey: #6B6B6B;
+  --color-navbar-bg: #00000000;
+  --color-link: #222222;
+  --color-link-hover-bg: #E0E0E0;
+  --color-button-primary: #6511FF;
+  --color-button-hover: #7C27FF;
+  --color-success: #00C853;
+  --color-danger: #FF3B30;
 }
 
-.custom-navbar .nav-link:hover {
-  background-color: var(--color-link-hover-bg);
-}
-
-.nav-link {
-  border-radius: 0.75rem;
-  transition: var(--transition-fast);
+html {
+  scroll-padding-top: 5rem;
 }
 
 .default-container {
   height: 100vh;
   width: 100%;
+  scroll-margin-top: 3rem;
 }
 
-.main-content {
-  padding: 3rem 0 0 0;
+.line-break {
+  display: none;
 }

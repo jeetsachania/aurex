@@ -1,0 +1,98 @@
+.custom-form-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  /* padding-top: 3rem; */ /* Can remove if not displaying nav on login/signup pages */
+}
+
+.custom-form-card {
+  width: 100%;
+  padding: 2rem;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+  border-radius: 2rem;
+  transition: box-shadow 0.3s ease;
+}
+
+.custom-form-card:focus-within {
+  box-shadow: 0 10px 20px rgba(var(--color-hover-shadow), 0.5);
+}
+
+.custom-form-card-title {
+  font-family: 'Orbitron';
+  font-size: 2rem;
+  margin-bottom: 1.5rem;
+  letter-spacing: var(--default-letter-spacing);
+}
+
+.custom-form-input {
+  font-family: 'Roboto Light';
+  height: 3rem;
+  width: 100%;
+  padding: 2rem;
+  margin: 10px 0;
+  border-radius: 1rem;
+  box-sizing: border-box;
+  background-color: white;
+}
+
+.custom-form-input:focus {
+  border: 1px solid var(--color-accent-primary);
+  outline: none;
+  box-shadow: none;
+}
+
+.custom-form-label {
+  font-family: 'Orbitron';
+  margin: 0;
+  padding: 0;
+  letter-spacing: var(--default-letter-spacing);
+}
+
+.custom-form-button {
+  width: 100%;
+  font-family: 'Orbitron';
+  letter-spacing: var(--default-letter-spacing);
+}
+
+.reminder {
+  font-family: 'Consolas';
+  font-size: 12px;
+}
+
+.text-link {
+  text-decoration: none;
+  color: var(--color-accent-primary);
+}
+
+.text-link:hover {
+  color: var(--color-accent-primary);
+  text-decoration: underline;
+}
+
+.logo {
+  height: 50px;
+  width: 50px;
+  cursor: pointer;
+}
+
+.shimmer {
+  color: grey;
+  display: inline-block;
+  mask: linear-gradient(45deg, #000 35%, #0005, #000 65%) right / 330% 200%;
+  animation: shimmer 3s linear infinite;
+}
+
+@keyframes shimmer {
+  0% {
+    mask-position: right;
+  }
+  100% {
+    mask-position: left;
+  }
+}
+
+hr.solid {
+  border-top: 3px solid var(--color-accent-primary);
+  border-radius: 1rem;
+}
