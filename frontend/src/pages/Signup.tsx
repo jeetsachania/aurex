@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-import Logo from "../assets/svgs/logo";
+import Logo from "../assets/svgs/Logo";
+
+import { validateEmail, validateUsername, validatePassword } from "../utils/Utils";
 
 const Signup: React.FC = () => {
   const navigate = useNavigate();
@@ -10,48 +12,37 @@ const Signup: React.FC = () => {
   const [username, setUsername] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [confirmPassword, setConfirmPassword] = useState<string>("");
+  const [isPasswordVisible, setIsPasswordVisible] = useState(false);
 
-  function validateEmail(email: string): boolean {
-    const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-    return emailRegex.test(email);
-  }
-
-  function validateConfirmEmail(email: string, confirmEmail: string): boolean {
+  function emailsMatch(email: string, confirmEmail: string): boolean {
     return email === confirmEmail;
   }
 
-  function validatePassword(
-    password: string,
-    confirmPassword: string
-  ): boolean {
-    const passwordRegex = /^(?!.*\s)[A-Za-z0-9`!"£$%^&*()#_+=-]{1,}$/;
-
-    if (!passwordRegex.test(password)) {
-      console.error("Password not valid");
+  const handlFormSubmit = (event: React.FormEvent) => {
+    event.preventDefault();
+    if (!validateEmail(email)) {
+      alert("email error")
     }
 
-    if (password === "" || confirmPassword === "") {
-      console.error("Password cannot be empty");
-      return false;
+    if (!validateUsername(username)) {
+      alert("username error")
     }
 
-    if (password === confirmPassword) {
-      return true;
+    if (!emailsMatch(email, confirmEmail)) {
+      alert("emails do not match")
     }
 
-    console.error("Passwords do not match");
-    return false;
-  }
+    if (!validatePassword(password) || !validatePassword(confirmPassword) || !(password === confirmPassword)) {
+      alert("passwords do not match")
+    }
+  };
+
+  const togglePasswordVisibility = () => {
+    setIsPasswordVisible(!isPasswordVisible);
+  };
 
   const handleRedirect = () => {
     navigate("/login");
-  };
-
-  const handleSignupSubmit = (event: React.FormEvent) => {
-    event.preventDefault();
-    console.log(validateEmail(email));
-    console.log(validateConfirmEmail(email, confirmEmail));
-    console.log(validatePassword(password, confirmPassword));
   };
 
   return (
@@ -61,71 +52,81 @@ const Signup: React.FC = () => {
           <div className="card-body">
             <Logo className="logo" />
             <h2 className="card-title custom-form-card-title">Signup</h2>
-            <form onSubmit={handleSignupSubmit}>
+            <form onSubmit={handlFormSubmit}>
               <div className="row">
-                <div className="col-md-6">
-                  <label
-                    htmlFor="email"
-                    className="form-label custom-form-label"
-                  >
-                    Email
-                  </label>
-                  <input
-                    type="text"
-                    className="form-control custom-form-input"
-                    id="email"
-                    placeholder="Email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    required
-                  />
+                <div className="col-md-6 mb-3">
+                  <div className="input-group">
+                    <div className="input-group-append">
+                      <span className="input-group-text input-group-icon">
+                        <i className="bi bi-envelope-fill"></i>
+                      </span>
+                    </div>
+                    <input
+                      type="text"
+                      className="form-control custom-form-input"
+                      id="email"
+                      placeholder="Email"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                      required
+                    />
+                  </div>
                 </div>
-                <div className="col-md-6">
-                  <label
-                    htmlFor="email"
-                    className="form-label custom-form-label"
-                  >
-                    Confirm Email
-                  </label>
-                  <input
-                    type="text"
-                    className="form-control custom-form-input"
-                    id="email"
-                    placeholder="Confirm Email"
-                    value={confirmEmail}
-                    onChange={(e) => setConfirmEmail(e.target.value)}
-                    required
-                  />
+                <div className="col-md-6 mb-3">
+                  <div className="input-group">
+                    <div className="input-group-append">
+                      <span className="input-group-text input-group-icon">
+                        <i className="bi bi-envelope-fill"></i>
+                      </span>
+                    </div>
+                    <input
+                      type="text"
+                      className="form-control custom-form-input"
+                      id="confirm-email"
+                      placeholder="Confirm Email"
+                      value={confirmEmail}
+                      onChange={(e) => setConfirmEmail(e.target.value)}
+                      required
+                    />
+                  </div>
                 </div>
               </div>
               <div className="mb-3">
-                <label
-                  htmlFor="username"
-                  className="form-label custom-form-label"
-                >
-                  Username
-                </label>
-                <input
-                  type="text"
-                  className="form-control custom-form-input"
-                  id="username"
-                  placeholder="Username"
-                  value={username}
-                  onChange={(e) => setUsername(e.target.value)}
-                  required
-                />
+                <div className="input-group">
+                  <div className="input-group-append">
+                    <span className="input-group-text input-group-icon">
+                      <i className="bi bi-person-fill"></i>
+                    </span>
+                  </div>
+                  <input
+                    type="text"
+                    className="form-control custom-form-input"
+                    id="username"
+                    placeholder="Username"
+                    value={username}
+                    onChange={(e) => setUsername(e.target.value)}
+                    required
+                  />
+                </div>
               </div>
               <div className="row">
-                <div className="col-md-6">
-                  <div className="mb-3">
-                    <label
-                      htmlFor="password"
-                      className="form-label custom-form-label"
-                    >
-                      Password
-                    </label>
+                <div className="col-md-6 mb-3">
+                  <div className="input-group">
+                    <div className="input-group-append">
+                      <span
+                        className="input-group-text input-group-icon"
+                        onClick={togglePasswordVisibility}
+                        style={{ cursor: "pointer" }}
+                      >
+                        {isPasswordVisible ? (
+                          <i className="bi bi-eye-slash-fill"></i>
+                        ) : (
+                          <i className="bi bi-eye-fill"></i>
+                        )}
+                      </span>
+                    </div>
                     <input
-                      type="password"
+                      type={isPasswordVisible ? "text" : "password"}
                       className="form-control custom-form-input"
                       id="password"
                       placeholder="Password"
@@ -136,15 +137,22 @@ const Signup: React.FC = () => {
                   </div>
                 </div>
                 <div className="col-md-6">
-                  <div className="mb-3">
-                    <label
-                      htmlFor="confirm-password"
-                      className="form-label custom-form-label"
-                    >
-                      Confirm Password
-                    </label>
+                  <div className="input-group">
+                    <div className="input-group-append">
+                      <span
+                        className="input-group-text input-group-icon"
+                        onClick={togglePasswordVisibility}
+                        style={{ cursor: "pointer" }}
+                      >
+                        {isPasswordVisible ? (
+                          <i className="bi bi-eye-slash-fill"></i>
+                        ) : (
+                          <i className="bi bi-eye-fill"></i>
+                        )}
+                      </span>
+                    </div>
                     <input
-                      type="password"
+                      type={isPasswordVisible ? "text" : "password"}
                       className="form-control custom-form-input"
                       id="confirm-password"
                       placeholder="Confirm Password"
@@ -157,7 +165,7 @@ const Signup: React.FC = () => {
               </div>
               <button
                 type="submit"
-                className="custom-button rounded-pill custom-form-button mt-3"
+                className="custom-button rounded-pill custom-form-button submit-button mt-3"
               >
                 Signup
               </button>

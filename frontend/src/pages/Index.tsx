@@ -26,16 +26,16 @@ const Index: React.FC<HomeProps> = ({ scrollTo }) => {
   return (
     <div className="container-fluid">
       <AppNavbar />
-      <section className="default-container" id="home">
+      <section className="default-container home" id="home">
         <Home />
       </section>
-      <section className="default-container" id="features">
+      <section className="default-container features" id="features">
         <Features />
       </section>
-      <section className="default-container" id="pricing">
+      <section className="default-container pricing" id="pricing">
         <Pricing />
       </section>
-      <section className="default-container" id="faq">
+      <section className="default-container faq" id="faq">
         <Faq />
       </section>
       <Footer />
