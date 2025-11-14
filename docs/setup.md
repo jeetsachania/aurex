@@ -84,9 +84,5 @@ pip install python-dotenv alembic
 4. Install dependencies
    ```
    npm install react-router-dom @tanstack/react-query axios chart.js react-chartjs-2
-   npm install -D tailwindcss postcss autoprefixer
-   ```
-5. Initialise TailwindCSS
-   ```
-   npx tailwindcss init -p
+   npm install -D postcss autoprefixer
    ```

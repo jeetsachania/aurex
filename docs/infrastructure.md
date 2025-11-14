@@ -6,7 +6,7 @@
 | **Language**              | Python                    |
 | **Web Framework**         | FastAPI                   |
 | **Database**              | PostgreSQL                |
-| **ORM**                   | SQLAlchemy                |
+| **ORM**                   | SQLAlchemy + Alembic      |
 | **Real Time Data**        | WebSockets via FastAPI    |
 | **Authentication**        | JWT                       |
 | **Testing**               | pytest                    |
