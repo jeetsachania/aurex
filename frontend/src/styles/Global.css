@@ -99,6 +99,7 @@ body.light-mode {
   --color-button-primary: #6511FF;
   --color-button-hover: #7C27FF;
   --color-success: #00C853;
+  --color-success-hover: #005b26;
   --color-danger: #FF3B30;
 }
 

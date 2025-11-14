@@ -1,0 +1,8 @@
+.submit-button {
+  background-color: var(--color-success);
+}
+
+.submit-button:hover {
+  /* background-color: var(--color-success-hover); */
+  background-color: green;
+}

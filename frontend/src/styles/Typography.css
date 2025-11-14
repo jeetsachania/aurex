@@ -26,3 +26,7 @@
   margin: 1rem 0;
   color: var(--color-text-grey);
 }
+
+.limited-feature {
+  color: var(--color-danger);
+}
