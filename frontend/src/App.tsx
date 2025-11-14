@@ -14,19 +14,18 @@ import "./styles/components/Button.css";
 import "./styles/components/Card.css";
 import "./styles/components/List.css";
 
-import "./styles/pages/Pricing.css";
 import "./styles/pages/Home.css";
+import "./styles/pages/Pricing.css";
 import "./styles/pages/Login.css";
 
 import Index from "./pages/Index";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
-// import Navbar from "./components/Navbar";
+import Reset from "./pages/Reset";
 
 const App: React.FC = () => {
   return (
     <Router>
-      {/* <Navbar /> */}
       <Routes>
         <Route path="/" element={<Index />} />
         <Route path="/features" element={<Index scrollTo="features" />} />
@@ -34,6 +33,7 @@ const App: React.FC = () => {
         <Route path="/faq" element={<Index scrollTo="faq" />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
+        <Route path="/reset" element={<Reset />} />
       </Routes>
     </Router>
   );
