@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 import Logo from "../assets/svgs/Logo";
 
@@ -14,10 +15,41 @@ const Login: React.FC = () => {
   const usernameError = formSubmitted && !validateInput(username);
   const passwordError = formSubmitted && !validatePassword(password);
 
-  const handleFormSubmit = (event: React.FormEvent) => {
+  const handleFormSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
     setFormSubmitted(true);
-    navigate("/dashboard")
+
+    try {
+      const response = await axios.post("http://localhost:8000/users/login", {
+        username,
+        password,
+      });
+      const { access_token } = response.data;
+      localStorage.setItem("access_token", access_token);
+      navigate("/dashboard");
+    } catch (error: unknown) {
+      if (axios.isAxiosError(error)) {
+        const status = error.response?.status;
+        const message =
+          error.response?.data?.detail || "An unexpected error occurred";
+
+        switch (status) {
+          case 400:
+            alert("Invalid request. Please check your input.");
+            break;
+          case 401:
+            alert("Invalid username or password.");
+            break;
+          case 500:
+            alert("Server error. Please try again later.");
+            break;
+          default:
+            alert(message);
+        }
+      } else {
+        alert("An unknown error occurred.");
+      }
+    }
   };
 
   const togglePasswordVisibility = () => {

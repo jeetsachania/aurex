@@ -58,13 +58,31 @@ const Signup: React.FC = () => {
           password,
         }
       );
-      navigate("/login");
-    } catch (error) {
-      if (error.response) {
-        alert("Error registering: " + error.response.data.detail);
+      if (response.status == 201) {
+        alert("Registration Successfull!");
+        navigate("/login");
+      }
+    } catch (error: unknown) {
+      if (axios.isAxiosError(error)) {
+        const status = error.response?.status;
+        const message =
+          error.response?.data?.detail || "An unexpected error occurred";
+
+        switch (status) {
+          case 400:
+            alert("Invalid request. Please check your input.");
+            break;
+          case 401:
+            alert("Invalid username or password.");
+            break;
+          case 500:
+            alert("Server error. Please try again later.");
+            break;
+          default:
+            alert(message);
+        }
       } else {
-        console.error(error);
-        alert("Error registering. Please try again later.");
+        alert("An unknown error occurred.");
       }
     }
   };
