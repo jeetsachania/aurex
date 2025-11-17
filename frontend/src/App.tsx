@@ -24,6 +24,7 @@ import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import Reset from "./pages/Reset";
 import Dashboard from "./pages/dashboard/Dashboard";
+import ProtectedRoute from "./components/ProtectedRoute";
 
 const App: React.FC = () => {
   return (
@@ -36,7 +37,9 @@ const App: React.FC = () => {
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/reset" element={<Reset />} />
-        <Route path="/dashboard" element={<Dashboard />} />
+        <Route element={<ProtectedRoute />}>
+          <Route path="/dashboard" element={<Dashboard />} />
+        </Route>
       </Routes>
     </Router>
   );
