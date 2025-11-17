@@ -1,4 +1,5 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 
 interface DashboardNavProps {
   activePage: string;
@@ -9,6 +10,12 @@ const DashboardNav: React.FC<DashboardNavProps> = ({
   activePage,
   onNavClick,
 }) => {
+  const navigate = useNavigate();
+  const logout = () => {
+    alert("logout")
+    localStorage.removeItem("access_token");
+    navigate("/login")
+  }
   return (
     <div>
       <a
@@ -70,7 +77,7 @@ const DashboardNav: React.FC<DashboardNavProps> = ({
         Settings
       </a>
       <hr className="solid"></hr>
-      <a href="#" onClick={() => onNavClick("logout")}>
+      <a href="#" onClick={logout}>
         <i className="bi bi-box-arrow-left"></i>
         Log Out
       </a>
