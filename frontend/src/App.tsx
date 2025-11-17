@@ -17,11 +17,13 @@ import "./styles/components/List.css";
 import "./styles/pages/Home.css";
 import "./styles/pages/Pricing.css";
 import "./styles/pages/Login.css";
+import "./styles/pages/Dashboard.css";
 
 import Index from "./pages/Index";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import Reset from "./pages/Reset";
+import Dashboard from "./pages/dashboard/Dashboard";
 
 const App: React.FC = () => {
   return (
@@ -34,6 +36,7 @@ const App: React.FC = () => {
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/reset" element={<Reset />} />
+        <Route path="/dashboard" element={<Dashboard />} />
       </Routes>
     </Router>
   );

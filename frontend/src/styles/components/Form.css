@@ -78,28 +78,6 @@
   text-decoration: underline;
 }
 
-.logo {
-  height: 50px;
-  width: 50px;
-  cursor: pointer;
-}
-
-.shimmer {
-  color: grey;
-  display: inline-block;
-  mask: linear-gradient(45deg, #000 35%, #0005, #000 65%) right / 330% 200%;
-  animation: shimmer 3s linear infinite;
-}
-
-@keyframes shimmer {
-  0% {
-    mask-position: right;
-  }
-  100% {
-    mask-position: left;
-  }
-}
-
 hr.solid {
   border-top: 3px solid var(--color-accent-primary);
   border-radius: 1rem;
