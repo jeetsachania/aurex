@@ -82,7 +82,7 @@ const Signup: React.FC = () => {
       <div className="container custom-form-container">
         <div className="card custom-form-card">
           <div className="card-body">
-            <Logo className="logo" />
+            <Logo additionalClassName="shimmer" redirectTo="/" />
             <h2 className="card-title custom-form-card-title">Signup</h2>
             <form onSubmit={handlFormSubmit}>
               <div className="row">

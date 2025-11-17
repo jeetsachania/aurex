@@ -17,6 +17,7 @@ const Login: React.FC = () => {
   const handleFormSubmit = (event: React.FormEvent) => {
     event.preventDefault();
     setFormSubmitted(true);
+    navigate("/dashboard")
   };
 
   const togglePasswordVisibility = () => {
@@ -32,7 +33,7 @@ const Login: React.FC = () => {
       <div className="container custom-form-container">
         <div className="card custom-form-card">
           <div className="card-body">
-            <Logo className="logo" />
+            <Logo additionalClassName="shimmer" redirectTo="/" />
             <h2 className="card-title custom-form-card-title">Login</h2>
             <form onSubmit={handleFormSubmit}>
               <div className="mb-3">
