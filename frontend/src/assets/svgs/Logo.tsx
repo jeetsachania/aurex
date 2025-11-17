@@ -1,20 +1,42 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 
-const Logo: React.FC<React.SVGProps<SVGSVGElement>> = () => {
+interface LogoProps extends React.SVGProps<SVGSVGElement> {
+  additionalClassName?: string;
+  onClick?: () => void;
+  redirectTo?: string;
+}
+
+const Logo: React.FC<LogoProps> = ({
+  additionalClassName,
+  onClick,
+  redirectTo,
+  ...props
+}) => {
   const navigate = useNavigate();
 
-  const handleClick = () => {
-    navigate("/");
+  const handleRedirect = (route: string) => {
+    navigate(route);
   };
+
+  const handleLogoClick =
+    onClick ||
+    (() => {
+      if (redirectTo) {
+        handleRedirect(redirectTo);
+      }
+    });
+
+  const classNames = `logo ${additionalClassName || ""}`.trim();
 
   return (
     <svg
       data-logo="logo"
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 68 41"
-      className="logo shimmer"
-      onClick={handleClick}
+      className={classNames}
+      onClick={handleLogoClick}
+      {...props}
     >
       <g
         style={{ opacity: 1 }}
