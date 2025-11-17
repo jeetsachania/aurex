@@ -13,7 +13,6 @@ class User(Base):
     email = Column(String, unique=True, index=True)
     username = Column(String, unique=True, index=True)
     hashed_password = Column(String)
-
-    @validates("hashed_password")
-    def hash_password(self, key, password):
-        return pwd_context.hash(password)
+    
+    def verify_password(self, password: str) -> bool:
+        return pwd_context.verify(password, self.hashed_password)
