@@ -1,10 +1,12 @@
 from datetime import datetime, timedelta
-from jose import JWTError, jwt
-from sqlalchemy.orm import Session
-from app.models.user import User
-from passlib.context import CryptContext
-from fastapi import HTTPException, status
 from typing import Optional
+
+from fastapi import HTTPException, status
+from jose import jwt
+from passlib.context import CryptContext
+from sqlalchemy.orm import Session
+
+from app.models.user import User
 
 SECRET_KEY = "supersecretkey"
 ALGORITHM = "HS256"

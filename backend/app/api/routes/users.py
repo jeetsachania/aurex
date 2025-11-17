@@ -1,9 +1,10 @@
 from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy.orm import Session
+from passlib.context import CryptContext
+
 from app.db.database import get_db
 from app.models.user import User
 from app.schemas.user import UserCreate, UserLogin, UserResponse
-from passlib.context import CryptContext
 from app.services.auth import authenticate_user, create_access_token
 
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
