@@ -13,6 +13,12 @@ SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 Base = declarative_base()
 
 def get_db():
+    """
+    Get the SQLAlchemy database session.
+
+    Yields:
+        Session (`sqlalchemy.orm.session.Session`): An SQLAlchemy database session.
+    """
     db = SessionLocal()
     try:
         yield db
