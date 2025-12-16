@@ -2,7 +2,7 @@ import React from "react";
 
 const Orders: React.FC = () => {
   return (
-    <main className="col-md-9 col-lg-10 col-xl-10 col-xxl-10 col-xxxl-11 ms-sm-auto px-md-4 py-4 main-content">
+    <div className="row p-4">
       <div className="table-responsive">
         <table className="table table-striped align-middle">
           <thead className="table-dark">
@@ -27,7 +27,7 @@ const Orders: React.FC = () => {
           </tbody>
         </table>
       </div>
-    </main>
+    </div>
   );
 };
 

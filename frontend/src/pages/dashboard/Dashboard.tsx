@@ -64,13 +64,17 @@ const Dashboard: React.FC = () => {
               />
             </div>
           </nav>
-          {activePage === "home" && <Home />}
-          {activePage === "trending" && <Trending />}
-          {activePage === "orders" && <Orders />}
-          {activePage === "analytics" && <Analytics />}
-          {activePage === "support" && <Support />}
-          {activePage === "wallets" && <Wallets />}
-          {activePage === "settings" && <Settings />}
+          <main className="col-md-9 col-lg-10 col-xl-10 col-xxl-10 col-xxxl-11 ms-sm-auto px-md-4 py-4 main-content">
+            <div className="row g-4 mb-4">
+              {activePage === "home" && <Home />}
+              {activePage === "trending" && <Trending />}
+              {activePage === "orders" && <Orders />}
+              {activePage === "analytics" && <Analytics />}
+              {activePage === "support" && <Support />}
+              {activePage === "wallets" && <Wallets />}
+              {activePage === "settings" && <Settings />}
+            </div>
+          </main>
         </div>
       </div>
     </div>
