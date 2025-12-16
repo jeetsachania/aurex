@@ -1,3 +1,23 @@
+@media (min-width: 1400px) {
+  .col-xxl-2 {
+    width: 15%;
+  }
+
+  .col-xxl-10 {
+    width: 85%;
+  }
+}
+
+@media (min-width: 1800px) {
+  .col-xxxl-1 {
+    width: 10%;
+  }
+
+  .col-xxxl-11 {
+    width: 90%;
+  }
+}
+
 .dashboard {
   font-family: Consolas;
 }
@@ -8,6 +28,23 @@
 .offcanvas-title {
   font-family: "Consolas";
   letter-spacing: var(--default-letter-spacing);
+}
+
+.offcanvas {
+  max-width: 250px;
+}
+
+.offcanvas-header {
+  padding: 1rem 1rem 0 1rem;
+  background-color: var(--color-link-hover-bg);
+}
+
+.offcanvas-header .btn-close {
+  margin-right: 0;
+}
+
+.offcanvas-start {
+  width: 250px;
 }
 
 .sidebar {
@@ -47,39 +84,7 @@
   color: white;
 }
 
-.offcanvas {
-  max-width: 250px;
-}
-
-.offcanvas-header {
-  padding: 1rem 1rem 0 1rem;
-  background-color: var(--color-link-hover-bg);
-}
-
-.offcanvas-header .btn-close {
-  margin-right: 0;
-}
-
-.offcanvas-start {
-  width: 250px;
-}
-
-@media (min-width: 1400px) {
-  .col-xxl-2 {
-    width: 15%;
-  }
-
-  .col-xxl-10 {
-    width: 85%;
-  }
-}
-
-@media (min-width: 1800px) {
-  .col-xxxl-1 {
-    width: 10%;
-  }
-
-  .col-xxxl-11 {
-    width: 90%;
-  }
+.dashboard-header {
+  font-family: 'Orbitron';
+  letter-spacing: var(--default-letter-spacing);
 }

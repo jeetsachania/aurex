@@ -17,7 +17,9 @@ import "./styles/components/List.css";
 import "./styles/pages/Home.css";
 import "./styles/pages/Pricing.css";
 import "./styles/pages/Login.css";
-import "./styles/pages/Dashboard.css";
+
+import "./styles/pages/dashboard/Dashboard.css";
+import "./styles/pages/dashboard/Home.css";
 
 import Index from "./pages/Index";
 import Login from "./pages/Login";
