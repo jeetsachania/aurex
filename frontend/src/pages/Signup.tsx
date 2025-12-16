@@ -108,7 +108,7 @@ const Signup: React.FC = () => {
                   <div className="input-group">
                     <div className="input-group-append">
                       <span className="input-group-text input-group-icon">
-                        <i className="bi bi-envelope-fill"></i>
+                        <i className="bi bi-person-fill"></i>
                       </span>
                     </div>
                     <input
@@ -126,7 +126,7 @@ const Signup: React.FC = () => {
                   <div className="input-group">
                     <div className="input-group-append">
                       <span className="input-group-text input-group-icon">
-                        <i className="bi bi-envelope-fill"></i>
+                        <i className="bi bi-person-fill"></i>
                       </span>
                     </div>
                     <input

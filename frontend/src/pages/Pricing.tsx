@@ -132,10 +132,10 @@ const Pricing: React.FC = () => {
         <div className="row">
           {plans.map((plan) => (
             <div key={plan.title} className="col-md-4 mb-4">
-              <div className="card custom-card d-flex flex-column h-100">
+              <div className="card custom-card hover d-flex flex-column h-100">
                 <div className="card-body pb-2 flex-grow-1">
-                  <h5 className="card-title custom-card-title">{plan.title}</h5>
-                  <p className="card-text custom-card-text">
+                  <h5 className="card-title">{plan.title}</h5>
+                  <p className="card-text">
                     {isMonthly ? plan.priceMonthly : plan.priceAnually}
                     <span className="card-subtext">
                       {isMonthly ? "/BILLED MONTHLY" : "/BILLED ANUALLY"}
