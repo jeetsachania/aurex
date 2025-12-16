@@ -12,7 +12,6 @@ const DashboardNav: React.FC<DashboardNavProps> = ({
 }) => {
   const navigate = useNavigate();
   const logout = () => {
-    alert("logout")
     localStorage.removeItem("access_token");
     navigate("/login")
   }
