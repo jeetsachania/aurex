@@ -81,7 +81,7 @@ const Login: React.FC = () => {
                       usernameError ? "error" : ""
                     }`}
                     id="username"
-                    placeholder="Email / Username"
+                    placeholder="Username"
                     value={username}
                     onChange={(e) => setUsername(e.target.value)}
                     required
@@ -122,11 +122,11 @@ const Login: React.FC = () => {
                   className="form-label custom-form-label reminder"
                 >
                   Forgot{" "}
-                  <a className="text-link" href="/reset">
+                  <a className="text-link" href="/reset/username">
                     username
                   </a>{" "}
                   or{" "}
-                  <a className="text-link" href="/reset">
+                  <a className="text-link" href="/reset/password">
                     password
                   </a>
                   ?

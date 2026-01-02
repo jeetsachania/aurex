@@ -5,7 +5,7 @@ import Logo from "../assets/svgs/Logo";
 
 import { validateEmail } from "../utils/Utils";
 
-const Reset: React.FC = () => {
+const ResetPassword: React.FC = () => {
   const navigate = useNavigate();
   const [email, setEmail] = useState<string>("");
 
@@ -26,7 +26,7 @@ const Reset: React.FC = () => {
         <div className="card custom-form-card">
           <div className="card-body">
             <Logo className="logo" />
-            <h2 className="card-title custom-form-card-title">Reset</h2>
+            <h2 className="card-title custom-form-card-title">Reset Password</h2>
             <form onSubmit={handleFormSubmit}>
               <div className="mb-3">
                 <div className="input-group">
@@ -68,4 +68,4 @@ const Reset: React.FC = () => {
   );
 };
 
-export default Reset;
+export default ResetPassword;
