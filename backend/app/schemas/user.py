@@ -56,3 +56,6 @@ class UserLogin(BaseModel):
     """
     username: str
     password: str
+
+class UserEmail(BaseModel):
+    email: str
