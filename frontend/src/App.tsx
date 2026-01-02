@@ -24,7 +24,8 @@ import "./styles/pages/dashboard/Home.css";
 import Index from "./pages/Index";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
-import Reset from "./pages/Reset";
+import ResetUsername from "./pages/ResetUsername";
+import ResetPassword from "./pages/ResetPassword";
 import Dashboard from "./pages/dashboard/Dashboard";
 import ProtectedRoute from "./components/ProtectedRoute";
 
@@ -38,7 +39,8 @@ const App: React.FC = () => {
         <Route path="/faq" element={<Index scrollTo="faq" />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
-        <Route path="/reset" element={<Reset />} />
+        <Route path="/reset/username" element={<ResetUsername />} />
+        <Route path="/reset/password" element={<ResetPassword />} />
         <Route element={<ProtectedRoute />}>
           <Route path="/dashboard" element={<Dashboard />} />
         </Route>
