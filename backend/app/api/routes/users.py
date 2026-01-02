@@ -4,7 +4,7 @@ from passlib.context import CryptContext
 
 from app.db.database import get_db
 from app.models.user import User
-from app.schemas.user import UserCreate, UserLogin, UserResponse
+from app.schemas.user import UserCreate, UserLogin, UserResponse, UserEmail
 from app.services.auth import authenticate_user, create_access_token
 
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
@@ -79,3 +79,8 @@ async def login_user(user: UserLogin, db: Session = Depends(get_db)) -> dict:
     db_user = authenticate_user(db=db, username=user.username, password=user.password)
     access_token = create_access_token(data={"sub": db_user.username})
     return {"access_token": access_token, "token_type": "bearer"}
+
+@router.post("/exists")
+async def user_exists(user: UserEmail, db: Session = Depends(get_db)):
+    db_user = db.query(User).filter(User.email == user.email).first()
+    return True if db_user != None else False
