@@ -1,4 +1,4 @@
-export const validateInput = (input: string): boolean => input.trim().length > 0;
+export const validateInput = (input: string): boolean => input.trim().length > 8;
 
 export const validateUsername = (username: string): boolean =>
   validateInput(username) && username.length >= 8;
