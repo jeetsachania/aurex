@@ -79,8 +79,9 @@
 }
 
 hr.solid {
-  border-top: 3px solid var(--color-accent-primary);
+  border-top: 2px solid gray;
   border-radius: 1rem;
+  opacity: 0.45;
 }
 
 .input-group-icon {
