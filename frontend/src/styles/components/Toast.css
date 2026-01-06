@@ -1,0 +1,7 @@
+.custom-toast {
+  background-color: #333;
+  color: #fff;
+  font-family: 'Roboto';
+  font-variant: all-small-caps;
+  letter-spacing: var(--default-letter-spacing);
+}
