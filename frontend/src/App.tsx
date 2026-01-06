@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 import "bootstrap/dist/css/bootstrap.min.css";
 import 'bootstrap/dist/js/bootstrap.bundle.min.js'
+import 'react-toastify/dist/ReactToastify.css';
 
 import "./styles/Global.css";
 import "./styles/Typography.css";
@@ -13,6 +14,7 @@ import "./styles/components/Form.css";
 import "./styles/components/Button.css";
 import "./styles/components/Card.css";
 import "./styles/components/List.css";
+import "./styles/components/Toast.css";
 
 import "./styles/pages/Home.css";
 import "./styles/pages/Pricing.css";
