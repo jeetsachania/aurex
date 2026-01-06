@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import { ToastContainer } from "react-toastify";
 
 import Logo from "../assets/svgs/Logo";
+import { toastSuccess, toastError } from "../components/ToastNotification";
 
 import {
   validateEmail,
@@ -20,6 +22,10 @@ const Signup: React.FC = () => {
   const [password, setPassword] = useState<string>("");
   const [confirmPassword, setConfirmPassword] = useState<string>("");
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
+  let isValid = true;
+  const toastOptions = {
+    autoClose: 5000,
+  };
 
   function emailsMatch(email: string, confirmEmail: string): boolean {
     return email === confirmEmail;
@@ -28,23 +34,32 @@ const Signup: React.FC = () => {
   const handlFormSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
     if (!validateEmail(email)) {
-      alert("email error");
+      toastError("Invalid email", toastOptions);
+      isValid = false;
     }
 
     if (!validateUsername(username)) {
-      alert("username error");
+      toastError("Username must be longer than 8 characters", toastOptions);
+      isValid = false;
     }
 
     if (!emailsMatch(email, confirmEmail)) {
-      alert("emails do not match");
+      toastError("Email addresses do not match", toastOptions);
+      isValid = false;
     }
 
-    if (
-      !validatePassword(password) ||
-      !validatePassword(confirmPassword) ||
-      !(password === confirmPassword)
-    ) {
-      alert("passwords do not match");
+    if (!validatePassword(password)) {
+      toastError("Password must be longer than 8 characters", toastOptions);
+      isValid = false;
+    }
+
+    if (!(password === confirmPassword)) {
+      toastError("Passwords do not match", toastOptions);
+      isValid = false;
+    }
+
+    if (!isValid) {
+      return;
     }
 
     try {
@@ -59,8 +74,10 @@ const Signup: React.FC = () => {
         }
       );
       if (response.status == 201) {
-        alert("Registration Successfull!");
-        navigate("/login");
+        toastSuccess("Registration Successfull");
+        setTimeout(() => {
+          navigate("/login");
+        }, 3500);
       }
     } catch (error: unknown) {
       if (axios.isAxiosError(error)) {
@@ -70,19 +87,19 @@ const Signup: React.FC = () => {
 
         switch (status) {
           case 400:
-            alert("Invalid request. Please check your input.");
+            toastError("Invalid request");
             break;
           case 401:
-            alert("Invalid username or password.");
+            toastError("Invalid username or password");
             break;
           case 500:
-            alert("Server error. Please try again later.");
+            toastError("Server error - Please try again later");
             break;
           default:
-            alert(message);
+            toastError(message);
         }
       } else {
-        alert("An unknown error occurred.");
+        toastError("An unknown error occured");
       }
     }
   };
@@ -97,6 +114,7 @@ const Signup: React.FC = () => {
 
   return (
     <div className="container-fluid">
+      <ToastContainer position="top-center" />
       <div className="container custom-form-container">
         <div className="card custom-form-card">
           <div className="card-body">

@@ -1,23 +1,19 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import { ToastContainer } from "react-toastify";
 
 import Logo from "../assets/svgs/Logo";
-
-import { validateInput, validatePassword } from "../utils/Utils";
+import { toastError } from "../components/ToastNotification";
 
 const Login: React.FC = () => {
   const navigate = useNavigate();
   const [username, setUsername] = useState<string>("");
   const [password, setPassword] = useState<string>("");
-  const [formSubmitted, setFormSubmitted] = useState(false);
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
-  const usernameError = formSubmitted && !validateInput(username);
-  const passwordError = formSubmitted && !validatePassword(password);
 
   const handleFormSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
-    setFormSubmitted(true);
 
     try {
       const response = await axios.post("http://localhost:8000/users/login", {
@@ -35,19 +31,19 @@ const Login: React.FC = () => {
 
         switch (status) {
           case 400:
-            alert("Invalid request. Please check your input.");
+            toastError("Invalid request");
             break;
           case 401:
-            alert("Invalid username or password.");
+            toastError("Invalid username or password");
             break;
           case 500:
-            alert("Server error. Please try again later.");
+            toastError("Server error - Please try again later");
             break;
           default:
-            alert(message);
+            toastError(message);
         }
       } else {
-        alert("An unknown error occurred.");
+        toastError("An unknown error occured");
       }
     }
   };
@@ -62,6 +58,7 @@ const Login: React.FC = () => {
 
   return (
     <div className="container-fluid">
+      <ToastContainer position="top-center" />
       <div className="container custom-form-container">
         <div className="card custom-form-card">
           <div className="card-body">
@@ -77,9 +74,7 @@ const Login: React.FC = () => {
                   </div>
                   <input
                     type="text"
-                    className={`form-control custom-form-input ${
-                      usernameError ? "error" : ""
-                    }`}
+                    className="form-control custom-form-input"
                     id="username"
                     placeholder="Username"
                     value={username}
@@ -105,9 +100,7 @@ const Login: React.FC = () => {
                   </div>
                   <input
                     type={isPasswordVisible ? "text" : "password"}
-                    className={`form-control custom-form-input ${
-                      passwordError ? "error" : ""
-                    }`}
+                    className="form-control custom-form-input"
                     id="password"
                     placeholder="Password"
                     value={password}
