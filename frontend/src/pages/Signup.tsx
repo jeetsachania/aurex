@@ -31,7 +31,7 @@ const Signup: React.FC = () => {
     return email === confirmEmail;
   }
 
-  const handlFormSubmit = async (event: React.FormEvent) => {
+  const handleFormSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
     if (!validateEmail(email)) {
       toastError("Invalid email", toastOptions);
@@ -120,7 +120,7 @@ const Signup: React.FC = () => {
           <div className="card-body">
             <Logo additionalClassName="shimmer" redirectTo="/" />
             <h2 className="card-title custom-form-card-title">Signup</h2>
-            <form onSubmit={handlFormSubmit}>
+            <form onSubmit={handleFormSubmit}>
               <div className="row">
                 <div className="col-md-6 mb-3">
                   <div className="input-group">
