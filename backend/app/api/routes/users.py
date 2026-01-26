@@ -1,15 +1,23 @@
 from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy.orm import Session
 from passlib.context import CryptContext
+from pydantic import BaseModel
 
 from app.db.database import get_db
 from app.models.user import User
 from app.schemas.user import UserCreate, UserLogin, UserResponse, UserEmail
-from app.services.auth import authenticate_user, create_access_token
+from app.services.session_auth import TokenCheckResult, create_token, check_expiry, decode_token, token_expired
+from app.db.user_auth import authenticate_user
+from config import settings
+
+ACCESS_TOKEN_EXPIRE_MINUTES = settings.ACCESS_TOKEN_EXPIRE_MINUTES
+REFRESH_TOKEN_EXPIRE_MINUTES = settings.REFRESH_TOKEN_EXPIRE_MINUTES
 
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
-
 router = APIRouter()
+
+class RefreshTokenRequest(BaseModel):
+    refresh_token: str
 
 @router.post("/register", response_model=UserResponse, status_code=status.HTTP_201_CREATED)
 async def register_user(user: UserCreate, db: Session = Depends(get_db)) -> UserResponse:
@@ -77,10 +85,55 @@ async def login_user(user: UserLogin, db: Session = Depends(get_db)) -> dict:
         `dict`: The created access token for the authenticated user.
     """
     db_user = authenticate_user(db=db, username=user.username, password=user.password)
-    access_token = create_access_token(data={"sub": db_user.username})
-    return {"access_token": access_token, "token_type": "bearer"}
+    access_token = create_token(data={"username": db_user.username}, expiry_minutes=ACCESS_TOKEN_EXPIRE_MINUTES)
+    refresh_token = create_token(data={"username": db_user.username}, expiry_minutes=REFRESH_TOKEN_EXPIRE_MINUTES)
+    return {"access_token": access_token, "refresh_token": refresh_token, "token_type": "bearer"}
 
 @router.post("/exists")
 async def user_exists(user: UserEmail, db: Session = Depends(get_db)):
     db_user = db.query(User).filter(User.email == user.email).first()
     return True if db_user != None else False
+
+@router.post("/refresh_token")
+async def refresh_token(payload: RefreshTokenRequest, db: Session = Depends(get_db)) -> dict:
+    """
+    Refreshes the access token using a valid refresh token.
+
+    Args:
+        refresh_token (str): The refresh token provided by the user.
+        db (Session): SQLAlchemy database session.
+
+    Returns:
+        dict: A new access token for the authenticated user.
+    """
+    decoded_payload = decode_token(payload.refresh_token)
+
+    if token_expired(decoded_payload):
+        raise HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED,
+            detail="Invalid or expired refresh token",
+        )
+
+    username = decoded_payload.get("username")
+    db_user = db.query(User).filter(User.username == username).first()
+
+    if not db_user:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail="User not found",
+        )
+
+    new_access_token = create_token(data={"username": db_user.username}, expiry_minutes=ACCESS_TOKEN_EXPIRE_MINUTES)
+
+    return {"access_token": new_access_token, "token_type": "bearer"}
+
+@router.post("/settings")
+async def get_info(token: TokenCheckResult = Depends(check_expiry), db: Session = Depends(get_db)):
+    if token.is_valid:
+        db_user = db.query(User).filter(User.username == token.username).first()
+        return {"status": token.status_code, "email": db_user.email, "username": db_user.username}
+    else:
+        raise HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED,
+            detail="Token expired",
+        )
