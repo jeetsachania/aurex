@@ -20,8 +20,8 @@ const Login: React.FC = () => {
         username,
         password,
       });
-      const { access_token } = response.data;
-      localStorage.setItem("access_token", access_token);
+      localStorage.setItem("access_token", response.data.access_token);
+      localStorage.setItem("refresh_token", response.data.refresh_token);
       navigate("/dashboard");
     } catch (error: unknown) {
       if (axios.isAxiosError(error)) {
