@@ -36,22 +36,6 @@ const DashboardNav: React.FC<DashboardNavProps> = ({
       <hr className="solid"></hr>
       <a
         href="#"
-        className={activePage === "orders" ? "active" : ""}
-        onClick={() => onNavClick("orders")}
-      >
-        <i className="bi bi-book-fill"></i>
-        Orders
-      </a>
-      <a
-        href="#"
-        className={activePage === "analytics" ? "active" : ""}
-        onClick={() => onNavClick("analytics")}
-      >
-        <i className="bi bi-activity"></i>
-        Analytics
-      </a>
-      <a
-        href="#"
         className={activePage === "wallets" ? "active" : ""}
         onClick={() => onNavClick("wallets")}
       >

@@ -39,11 +39,6 @@ const Footer: React.FC = () => {
                   Register
                 </a>
               </li>
-              <li className="mb-1">
-                <a href="#" className="text-decoration-none">
-                  Orders
-                </a>
-              </li>
             </ul>
           </div>
           <div className="col-md-2 mb-3">

@@ -2,8 +2,6 @@ import React, { useState } from "react";
 import DashboardNav from "../../components/DashboardNav";
 import Home from "./Home";
 import Trending from "./Trending";
-import Orders from "./Orders";
-import Analytics from "./Analytics";
 import Support from "./Support";
 import Wallets from "./Wallets";
 import Settings from "./Settings";
@@ -65,11 +63,9 @@ const Dashboard: React.FC = () => {
             </div>
           </nav>
           <main className="col-md-9 col-lg-10 col-xl-10 col-xxl-10 col-xxxl-11 ms-sm-auto px-md-4 py-4 main-content">
-            <div className="row g-4 mb-4">
+            <div className="row">
               {activePage === "home" && <Home />}
               {activePage === "trending" && <Trending />}
-              {activePage === "orders" && <Orders />}
-              {activePage === "analytics" && <Analytics />}
               {activePage === "support" && <Support />}
               {activePage === "wallets" && <Wallets />}
               {activePage === "settings" && <Settings />}
