@@ -22,6 +22,7 @@
   --color-accent-light: rgb(188, 149, 250);
   --color-accent-light-soft: #E0E0E0;
   --color-hover-shadow: 101, 17, 255;
+  --color-default-hover: #FFFFFF25;
 
   /* Default Margin, Padding & Spacing */
   --default-letter-spacing: 1px;
