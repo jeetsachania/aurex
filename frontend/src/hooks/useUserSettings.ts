@@ -20,7 +20,7 @@ export function useUserSettings() {
     const loadUser = async () => {
       try {
         const response = await fetchWithAuth("http://localhost:8000/users/settings", {
-          method: "POST",
+          method: "GET",
           headers: { "Content-Type": "application/json" },
         });
 
