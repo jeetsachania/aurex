@@ -1,12 +1,13 @@
-from fastapi import APIRouter, Depends, HTTPException, status
+from fastapi import APIRouter, Body, Depends, HTTPException, status
 from sqlalchemy.orm import Session
 from passlib.context import CryptContext
 from pydantic import BaseModel
 
+from app.api.deps import get_current_user
 from app.db.database import get_db
 from app.models.user import User
-from app.schemas.user import UserCreate, UserLogin, UserResponse, UserEmail
-from app.services.session_auth import TokenCheckResult, create_token, check_expiry, decode_token, token_expired
+from app.schemas.user import UserCreate, UserResponse
+from app.services.session_auth import create_token, decode_token, token_expired
 from app.db.user_auth import authenticate_user
 from config import settings
 
@@ -69,7 +70,7 @@ async def register_user(user: UserCreate, db: Session = Depends(get_db)) -> User
     )
 
 @router.post("/login")
-async def login_user(user: UserLogin, db: Session = Depends(get_db)) -> dict:
+async def login_user(username: str = Body(..., embed=True), password: str = Body(..., embed=True), db: Session = Depends(get_db)) -> dict:
     """
     Login a user.
 
@@ -84,14 +85,20 @@ async def login_user(user: UserLogin, db: Session = Depends(get_db)) -> dict:
     Returns:
         `dict`: The created access token for the authenticated user.
     """
-    db_user = authenticate_user(db=db, username=user.username, password=user.password)
+    db_user = authenticate_user(db=db, username=username, password=password)
     access_token = create_token(data={"username": db_user.username}, expiry_minutes=ACCESS_TOKEN_EXPIRE_MINUTES)
     refresh_token = create_token(data={"username": db_user.username}, expiry_minutes=REFRESH_TOKEN_EXPIRE_MINUTES)
-    return {"access_token": access_token, "refresh_token": refresh_token, "token_type": "bearer"}
+    print(access_token)
+
+    return {
+        "access_token": access_token,
+        "refresh_token": refresh_token,
+        "token_type": "bearer"
+    }
 
 @router.post("/exists")
-async def user_exists(user: UserEmail, db: Session = Depends(get_db)):
-    db_user = db.query(User).filter(User.email == user.email).first()
+async def user_exists(email: str = Body(..., embed=True), db: Session = Depends(get_db)):
+    db_user = db.query(User).filter(User.email == email).first()
     return True if db_user != None else False
 
 @router.post("/refresh_token")
@@ -125,15 +132,15 @@ async def refresh_token(payload: RefreshTokenRequest, db: Session = Depends(get_
 
     new_access_token = create_token(data={"username": db_user.username}, expiry_minutes=ACCESS_TOKEN_EXPIRE_MINUTES)
 
-    return {"access_token": new_access_token, "token_type": "bearer"}
+    return {
+        "access_token": new_access_token,
+        "token_type": "bearer"
+    }
 
-@router.post("/settings")
-async def get_info(token: TokenCheckResult = Depends(check_expiry), db: Session = Depends(get_db)):
-    if token.is_valid:
-        db_user = db.query(User).filter(User.username == token.username).first()
-        return {"status": token.status_code, "email": db_user.email, "username": db_user.username}
-    else:
-        raise HTTPException(
-            status_code=status.HTTP_401_UNAUTHORIZED,
-            detail="Token expired",
-        )
+@router.get("/settings")
+async def get_info(user: User = Depends(get_current_user)):
+    return {
+        "status": 200,
+        "email": user.email,
+        "username": user.username
+    }
