@@ -45,17 +45,3 @@ class UserResponse(BaseModel):
         Parse the SQLAlchemy ORM model into a Pydantic model.
         """
         orm_mode = True
-
-class UserLogin(BaseModel):
-    """
-    UserLogin Schema.
-
-    Attributes:
-        username (`constr`): User's username.
-        password (`constr`): User's password.
-    """
-    username: str
-    password: str
-
-class UserEmail(BaseModel):
-    email: str
