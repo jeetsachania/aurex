@@ -1,6 +1,6 @@
+from passlib.context import CryptContext
 from sqlalchemy import Column, Integer, String
 from sqlalchemy.orm import relationship
-from passlib.context import CryptContext
 
 from app.db.database import Base
 
