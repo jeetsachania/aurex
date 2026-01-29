@@ -1,12 +1,12 @@
 from sqlalchemy import (
     Column,
-    Integer,
-    String,
-    ForeignKey,
-    Numeric,
     DateTime,
-    UniqueConstraint,
+    ForeignKey,
     func,
+    Integer,
+    Numeric,
+    String,
+    UniqueConstraint
 )
 from sqlalchemy.orm import relationship
 
