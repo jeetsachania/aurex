@@ -79,7 +79,8 @@ async def login_user(username: str = Body(..., embed=True), password: str = Body
     if authenticated.
 
     Args:
-        user (`UserCreate`): Data used to create the new user.
+        username (`str`): The user's username.
+        password (`str`): The user's password.
         db (`Session`): SQLAlchemy database session.
 
     Returns:
@@ -107,8 +108,8 @@ async def refresh_token(payload: RefreshTokenRequest, db: Session = Depends(get_
     Refreshes the access token using a valid refresh token.
 
     Args:
-        refresh_token (str): The refresh token provided by the user.
-        db (Session): SQLAlchemy database session.
+        payload (`RefreshTokenRequest`): The refresh token request.
+        db (`Session`): SQLAlchemy database session.
 
     Returns:
         dict: A new access token for the authenticated user.
