@@ -1,10 +1,11 @@
 from decimal import Decimal
+from typing import List
 
 from fastapi import APIRouter, Body, Depends, HTTPException, status
 from sqlalchemy.orm import Session
 
 from app.api.deps import get_current_user
-from app.crud.wallet import get, exists, validate_deposit, validate_withdrawal, validate_delete, commit_wallet
+from app.crud.wallet import get, exists, validate_deposit, validate_withdrawal, validate_delete, commit_wallet, get_all
 from app.db.database import get_db
 from app.models.user import User
 from app.models.wallet import Wallet
@@ -125,3 +126,18 @@ def delete(currency: str, user: User = Depends(get_current_user), db: Session = 
     db.delete(wallet)
     db.commit()
     return
+
+
+@router.get("/list", response_model=List[WalletResponse], status_code=status.HTTP_200_OK)
+def get_wallets(user: User = Depends(get_current_user), db: Session = Depends(get_db)):
+    """
+    Fetches all wallets for the given user.
+
+    Args:
+        user (`User`): The current user.
+        db (`Session`): SQLAlchemy database session.
+
+    Returns:
+        `sqlalchemy.sql.expression.ColumnElement`: All wallets for the given user.
+    """
+    return get_all(db, user.id)

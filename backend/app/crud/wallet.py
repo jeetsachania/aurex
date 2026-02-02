@@ -39,6 +39,25 @@ def get(db: Session, user_id: int, currency: str) -> Wallet:
     return wallet
 
 
+def get_all(db: Session, user_id: int) -> list:
+    """
+    Fetches all wallets for the given user.
+
+    Args:
+        db (`Session`): SQLAlchemy database session.
+        user_id (`int`): The user's ID.
+
+    Returns:
+        `sqlalchemy.sql.expression.ColumnElement`: All wallets for the given user.
+    """
+    return (
+        db.query(Wallet)
+        .filter(Wallet.user_id == user_id)
+        .order_by(Wallet.currency)
+        .all()
+    )
+
+
 def exists(db: Session, user_id: int, currency: str) -> bool:
     """
     Check if a wallet with the given currency exists for the given user.
