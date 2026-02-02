@@ -22,7 +22,7 @@
   font-family: 'Orbitron';
   font-size: 2rem;
   margin-bottom: 1.5rem;
-  letter-spacing: var(--default-letter-spacing);
+  letter-spacing: var(--letter-spacing-s);
 }
 
 .custom-form-input {
@@ -46,13 +46,13 @@
   font-family: 'Orbitron';
   margin: 0;
   padding: 0;
-  letter-spacing: var(--default-letter-spacing);
+  letter-spacing: var(--letter-spacing-s);
 }
 
 .custom-form-button {
   width: 100%;
   font-family: 'Orbitron';
-  letter-spacing: var(--default-letter-spacing);
+  letter-spacing: var(--letter-spacing-s);
 }
 
 .submit-button {

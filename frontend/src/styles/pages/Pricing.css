@@ -1,14 +1,14 @@
 .pricing .card-title {
   font-family: 'Orbitron';
   font-size: 22px;
-  letter-spacing: var(--default-letter-spacing);
+  letter-spacing: var(--letter-spacing-s);
 }
 
 .pricing .card-text {
   font-family: 'Consolas';
   font-size: 18px;
   font-weight: bold;
-  letter-spacing: var(--default-letter-spacing);
+  letter-spacing: var(--letter-spacing-s);
 }
 
 .pricing .card-subtext {
@@ -22,5 +22,5 @@
 
 .pricing .custom-button {
   font-family: 'Consolas';
-  letter-spacing: var(--default-letter-spacing);
+  letter-spacing: var(--letter-spacing-s);
 }

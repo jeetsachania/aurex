@@ -25,7 +25,8 @@
   --color-default-hover: #FFFFFF25;
 
   /* Default Margin, Padding & Spacing */
-  --default-letter-spacing: 1px;
+  --letter-spacing-s: 1px;
+  --letter-spacing-m: 2px;
 
   /* Transitions */
   --transition-fast: background-color 0.2s ease, color 0.2s ease;

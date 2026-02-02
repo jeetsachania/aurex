@@ -32,5 +32,5 @@
 
 .custom-list li,
 .custom-list-group-item {
-  letter-spacing: var(--default-letter-spacing);
+  letter-spacing: var(--letter-spacing-s);
 }

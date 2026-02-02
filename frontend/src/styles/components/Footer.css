@@ -1,6 +1,6 @@
 .footer {
   font-family: 'Orbitron';
-  letter-spacing: var(--default-letter-spacing);
+  letter-spacing: var(--letter-spacing-s);
 }
 
 .footer li a {

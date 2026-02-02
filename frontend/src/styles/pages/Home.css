@@ -22,7 +22,7 @@
 
 .hero h1 {
   font-family: 'Orbitron';
-  letter-spacing: var(--default-letter-spacing);
+  letter-spacing: var(--letter-spacing-s);
   margin: 1rem 0;
 }
 

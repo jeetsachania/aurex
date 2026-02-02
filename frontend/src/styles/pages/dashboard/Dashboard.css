@@ -27,7 +27,7 @@
 .offcanvas-header,
 .offcanvas-title {
   font-family: "Consolas";
-  letter-spacing: var(--default-letter-spacing);
+  letter-spacing: var(--letter-spacing-s);
 }
 
 .offcanvas {
@@ -85,5 +85,5 @@
 
 .dashboard-header {
   font-family: 'Orbitron';
-  letter-spacing: var(--default-letter-spacing);
+  letter-spacing: var(--letter-spacing-s);
 }

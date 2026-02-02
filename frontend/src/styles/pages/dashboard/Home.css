@@ -7,27 +7,23 @@
   transition: var(--transition-smooth);
 }
 
-.home .custom-card:hover {
-  /* background-color: var(--color-default-hover); */
-}
-
 .home .card-title {
   font-family: 'Orbitron';
   font-weight: bold;
   font-size: 1rem;
-  letter-spacing: var(--default-letter-spacing);
+  letter-spacing: var(--letter-spacing-m);
 }
 
 .home .card-text {
   font-family: 'Consolas';
   font-size: clamp(1rem, 1.6vw, 1.4rem);
   white-space: nowrap;
-  letter-spacing: var(--default-letter-spacing);
+  letter-spacing: var(--letter-spacing-s);
 }
 
 .home .badge {
   font-size: 12px;
-  letter-spacing: var(--default-letter-spacing);
+  letter-spacing: var(--letter-spacing-s);
 }
 
 .rounded-table {
@@ -39,5 +35,59 @@
   font-family: 'Orbitron';
   font-size: 0.75rem;
   border-radius: 0.5rem 0.5rem 0.5rem 0.5rem;
-  letter-spacing: var(--default-letter-spacing);
+  letter-spacing: var(--letter-spacing-s);
+}
+
+/* Wallet Styling */
+
+.wallet-actions {
+  display: flex;
+  justify-content: flex-start;
+}
+
+.wallet-icons {
+  display: flex;
+  gap: 0.5rem;
+  opacity: 0;
+  transform: translateY(8px);
+  pointer-events: none;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.wallet-card:hover .wallet-icons,
+.wallet-card:focus-within .wallet-icons {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+.wallet-btn {
+  background-color: var(--bs-primary);
+  border: none;
+  border-radius: 50%;
+  width: 2rem;
+  height: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  padding: 0;
+  font-size: 1rem;
+  transition: var(--transition-smooth);
+}
+
+.wallet-btn:hover,
+.wallet-btn:focus {
+  color: #fff;
+  outline: none;
+}
+
+#deposit:hover,
+#deposit:focus {
+  background-color: var(--color-success);
+}
+
+#withdraw:hover,
+#withdraw:focus {
+  background-color: var(--color-danger);
 }

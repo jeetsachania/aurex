@@ -17,7 +17,7 @@
 
 .custom-header {
   font-family: 'Orbitron';
-  letter-spacing: var(--default-letter-spacing);
+  letter-spacing: var(--letter-spacing-s);
 }
 
 .subtext {
