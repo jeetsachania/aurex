@@ -67,7 +67,6 @@ const Dashboard: React.FC = () => {
               {activePage === "home" && <Home />}
               {activePage === "trending" && <Trending />}
               {activePage === "support" && <Support />}
-              {activePage === "wallets" && <Wallets />}
               {activePage === "settings" && <Settings />}
             </div>
           </main>
