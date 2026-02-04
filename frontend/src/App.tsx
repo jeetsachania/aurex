@@ -23,6 +23,7 @@ import "./styles/pages/Login.css";
 import "./styles/pages/dashboard/Dashboard.css";
 import "./styles/pages/dashboard/Home.css";
 import "./styles/pages/dashboard/Settings.css";
+import "./styles/pages/dashboard/Wallet.css";
 
 import Index from "./pages/Index";
 import Login from "./pages/Login";
