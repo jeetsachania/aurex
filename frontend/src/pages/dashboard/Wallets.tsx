@@ -9,7 +9,7 @@ interface WalletCardProps {
 
 function WalletCard({ currency, balance }: WalletCardProps) {
   return (
-    <div className="col-3 col-lg-2 col-xl-2 col-xxl-2 col-xxxl-1 d-flex">
+    <div className="col-4 col-md-3 col-lg-2 col-xl-2 col-xxl-2 col-xxxl-1 d-flex">
       <div className="card custom-card wallet-card w-100" tabIndex={0}>
         <div className="card-body d-flex flex-column justify-content-between">
           <h6 className="card-title">{currency}</h6>
@@ -19,7 +19,11 @@ function WalletCard({ currency, balance }: WalletCardProps) {
               <button className="wallet-btn" id="deposit" aria-label="Deposit">
                 <i className="bi bi-plus"></i>
               </button>
-              <button className="wallet-btn" id="withdraw" aria-label="Withdraw">
+              <button
+                className="wallet-btn"
+                id="withdraw"
+                aria-label="Withdraw"
+              >
                 <i className="bi bi-dash"></i>
               </button>
             </div>
@@ -45,26 +49,6 @@ const Wallets: React.FC = () => {
   return (
     <div>
       <h3 className="custom-header">Wallets</h3>
-      {/* <div className="wallet-button-container mb-3">
-        <button
-          type="submit"
-          className="custom-button rounded-pill submit-button me-2"
-        >
-          Deposit
-        </button>
-        <button
-          type="submit"
-          className="custom-button rounded-pill submit-button me-2"
-        >
-          Withdraw
-        </button>
-        <button
-          type="submit"
-          className="custom-button rounded-pill submit-button"
-        >
-          Add Wallet
-        </button>
-      </div> */}
       <div className="row g-3 mb-3 align-items-stretch">
         {wallets.map((wallet) => (
           <WalletCard
