@@ -19,7 +19,10 @@ async function refreshAccessToken(): Promise<string> {
   return data.access_token;
 }
 
-export async function fetchWithAuth(input: RequestInfo, init?: RequestInit): Promise<Response> {
+export async function fetchWithAuth(
+  input: RequestInfo,
+  init?: RequestInit,
+): Promise<Response> {
   let token = localStorage.getItem("access_token");
 
   const headers = new Headers(init?.headers || {});
@@ -34,6 +37,45 @@ export async function fetchWithAuth(input: RequestInfo, init?: RequestInit): Pro
 
       headers.set("Authorization", `Bearer ${token}`);
       response = await fetch(input, { ...init, headers });
+    } catch (err: any) {
+      toastError("Session expired. Please log in again.");
+      throw err;
+    }
+  }
+
+  return response;
+}
+
+export async function postWithAuth(
+  url: RequestInfo,
+  body: any,
+  init?: RequestInit,
+): Promise<Response> {
+  let token = localStorage.getItem("access_token");
+
+  const headers = new Headers(init?.headers || {});
+  headers.set("Content-Type", "application/json");
+
+  if (token) {
+    headers.set("Authorization", `Bearer ${token}`);
+  }
+
+  const requestInit: RequestInit = {
+    method: "POST",
+    ...init,
+    headers,
+    body: JSON.stringify(body),
+  };
+
+  let response = await fetch(url, requestInit);
+
+  if (response.status === 401) {
+    try {
+      toastInfo("Refreshing access token...");
+      token = await refreshAccessToken();
+
+      headers.set("Authorization", `Bearer ${token}`);
+      response = await fetch(url, requestInit);
     } catch (err: any) {
       toastError("Session expired. Please log in again.");
       throw err;
