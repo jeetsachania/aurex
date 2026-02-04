@@ -271,7 +271,7 @@ const Signup: React.FC = () => {
               </div>
               <button
                 type="submit"
-                className="custom-button rounded-pill custom-form-button submit-button mt-3"
+                className="rounded-pill custom-button custom-form-button confirm mt-3"
               >
                 Signup
               </button>
@@ -279,7 +279,7 @@ const Signup: React.FC = () => {
             <hr className="solid"></hr>
             <button
               type="submit"
-              className="custom-button rounded-pill custom-form-button"
+              className="rounded-pill custom-button custom-form-button redirect"
               onClick={handleRedirect}
             >
               Login

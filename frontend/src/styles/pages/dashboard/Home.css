@@ -1,26 +1,3 @@
-.home .custom-card {
-  min-height: 100px;
-  background-color: transparent;
-  background-color: var(--color-link-hover-bg);
-  color: var(--color-text);
-  border-radius: 0.5rem;
-  transition: var(--transition-smooth);
-}
-
-.home .card-title {
-  font-family: 'Orbitron';
-  font-weight: bold;
-  font-size: 1rem;
-  letter-spacing: var(--letter-spacing-m);
-}
-
-.home .card-text {
-  font-family: 'Consolas';
-  font-size: clamp(1rem, 1.6vw, 1.4rem);
-  white-space: nowrap;
-  letter-spacing: var(--letter-spacing-s);
-}
-
 .home .badge {
   font-size: 12px;
   letter-spacing: var(--letter-spacing-s);
@@ -61,7 +38,7 @@
   pointer-events: auto;
 }
 
-.wallet-btn {
+.wallet-button {
   background-color: var(--bs-primary);
   border: none;
   border-radius: 50%;
@@ -76,8 +53,8 @@
   transition: var(--transition-smooth);
 }
 
-.wallet-btn:hover,
-.wallet-btn:focus {
+.wallet-button:hover,
+.wallet-button:focus {
   color: #fff;
   outline: none;
 }

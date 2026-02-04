@@ -1,14 +1,41 @@
 .custom-button {
   padding: 0.5rem 1rem;
-  background-color: var(--color-button-primary);
   border: none;
   border-radius: 0.5rem;
   color: white;
   font-size: 1rem;
+  /* font-weight: 500; */
   cursor: pointer;
-  transition: var(--transition-smooth);
+  position: relative;
+  overflow: hidden;
 }
 
-.custom-button:hover {
-  background-color: var(--color-button-hover);
+.custom-button::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.08);
+  opacity: 0;
+  transition: opacity 0.2s ease;
+  pointer-events: none;
+}
+
+.custom-button:hover::after {
+  opacity: 1;
+}
+
+.default {
+  background-color: var(--color-button-primary);
+}
+
+.confirm {
+  background-color: var(--bs-success);
+}
+
+.cancel {
+  background-color: var(--bs-danger);
+}
+
+.redirect {
+  background-color: var(--color-button-primary);
 }

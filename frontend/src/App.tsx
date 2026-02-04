@@ -12,9 +12,9 @@ import "./styles/components/Navbar.css";
 import "./styles/components/Footer.css";
 import "./styles/components/Form.css";
 import "./styles/components/Button.css";
-import "./styles/components/Card.css";
 import "./styles/components/List.css";
 import "./styles/components/Toast.css";
+import "./styles/components/TransactionModal.css";
 
 import "./styles/pages/Home.css";
 import "./styles/pages/Pricing.css";

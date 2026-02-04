@@ -10,7 +10,7 @@ interface KpiCardProps {
 
 function KpiCard({ title, value, delta, positive }: KpiCardProps) {
   return (
-    <div className="card custom-card">
+    <div className="card dashboard-card">
       <div className="card-body d-flex flex-column justify-content-between">
         <h6 className="card-title">{title}</h6>
         <div>
@@ -61,19 +61,19 @@ const Home: React.FC = () => {
       <div className="container-fluid">
         <div className="row g-3 mb-3 align-items-stretch">
           <div className="col-lg-6 d-flex">
-            <div className="card custom-card w-100">
+            <div className="card dashboard-card w-100">
               <div className="card-body">
                 <h6 className="card-title">Portfolio Performance</h6>
               </div>
             </div>
           </div>
           <div className="col-lg-6 d-flex flex-column gap-3">
-            <div className="card custom-card flex-fill">
+            <div className="card dashboard-card flex-fill">
               <div className="card-body">
                 <h6 className="card-title">Trending Instruments</h6>
               </div>
             </div>
-            <div className="card custom-card flex-fill">
+            <div className="card dashboard-card flex-fill">
               <div className="card-body">
                 <h6 className="card-title">Currency Exchange</h6>
               </div>

@@ -101,7 +101,7 @@ const ResetCredential: React.FC<ResetCredentialProps> = ({
               </div>
               <button
                 type="submit"
-                className="custom-button rounded-pill custom-form-button submit-button mt-3"
+                className="rounded-pill custom-button custom-form-button submit-button mt-3"
               >
                 Send Reset Link
               </button>
@@ -109,7 +109,7 @@ const ResetCredential: React.FC<ResetCredentialProps> = ({
             <hr className="solid"></hr>
             <button
               type="submit"
-              className="custom-button rounded-pill custom-form-button"
+              className="rounded-pill custom-button custom-form-button"
               onClick={handleRedirect}
             >
               Back

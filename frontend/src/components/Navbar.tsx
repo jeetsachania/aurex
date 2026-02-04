@@ -102,7 +102,7 @@ const AppNavbar: React.FC = () => {
               as={Link}
               to="/login"
               onClick={() => setExpanded(false)}
-              className="custom-button rounded-pill px-3 mx-2"
+              className="rounded-pill custom-button default px-3 mx-2"
             >
               LOGIN
             </Nav.Link>
@@ -110,7 +110,7 @@ const AppNavbar: React.FC = () => {
               as={Link}
               to="/signup"
               onClick={() => setExpanded(false)}
-              className="custom-button rounded-pill px-3 mx-2"
+              className="rounded-pill custom-button default px-3 mx-2"
             >
               SIGNUP
             </Nav.Link>

@@ -1,0 +1,42 @@
+.transaction-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.transaction-card {
+  background: white;
+  padding: 1.5rem;
+  border-radius: 8px;
+  width: 100%;
+  max-width: 400px;
+}
+
+.transaction-card .card-title {
+  font-family: 'Orbitron';
+  font-weight: bold;
+  font-size: 1.25rem;
+  letter-spacing: var(--letter-spacing-m);
+}
+
+.transaction-card .card-text {
+  font-family: 'Orbitron';
+  font-size: 0.75rem;
+  white-space: nowrap;
+  letter-spacing: var(--letter-spacing-s);
+}
+
+.error {
+  color: red
+}
+
+.modal-button {
+  width: 100%;
+  font-family: 'Orbitron';
+  letter-spacing: var(--letter-spacing-m);
+  transition: var(--transition-smooth);
+}

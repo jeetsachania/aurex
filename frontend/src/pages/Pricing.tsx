@@ -132,7 +132,7 @@ const Pricing: React.FC = () => {
         <div className="row">
           {plans.map((plan) => (
             <div key={plan.title} className="col-md-4 mb-4">
-              <div className="card custom-card hover d-flex flex-column h-100">
+              <div className="card pricing-card d-flex flex-column h-100">
                 <div className="card-body pb-2 flex-grow-1">
                   <h5 className="card-title">{plan.title}</h5>
                   <p className="card-text">
@@ -174,10 +174,10 @@ const Pricing: React.FC = () => {
                   </ul>
                 </div>
                 <div className="card-footer border-0 bg-transparent pt-0 pb-3">
-                  <button className="custom-button rounded-pill me-2">
+                  <button className="rounded-pill custom-button default me-2">
                     SELECT
                   </button>
-                  <button className="custom-button rounded-pill">DEMO</button>
+                  <button className="rounded-pill custom-button default">DEMO</button>
                 </div>
               </div>
             </div>
