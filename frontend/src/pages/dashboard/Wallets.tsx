@@ -19,18 +19,10 @@ function WalletCard({ currency, balance }: WalletCardProps) {
 
   const handleConfirm = async (amount: number) => {
     try {
-      let response: Response;
-      if (type === "deposit") {
-        response = await postWithAuth(
-          `http://localhost:8000/wallets/${currency}/deposit`,
-          { amount },
-        );
-      } else {
-        response = await postWithAuth(
-          `http://localhost:8000/wallets/${currency}/withdraw`,
-          { amount },
-        );
-      }
+      const response = await postWithAuth(
+        `http://localhost:8000/wallets/${currency}/${type}`,
+        { amount },
+      );
       if (!response.ok) {
         toastError("Failed");
       } else {
