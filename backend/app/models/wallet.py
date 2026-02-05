@@ -18,16 +18,16 @@ class Wallet(Base):
     Wallet Model
 
     Attributes:
-        id (`int`): Auto-incremented unique ID.
-        user_id (): User ID.
-        currency (): Wallet currency.
-        balance (): Wallet balance.
-        created_at (): Date created.
-        updated_at (): Date modified.
+        id (`sqlalchemy.Serial`): Auto-incremented unique ID.
+        user_id (`sqlalchemy.Integer`): User ID.
+        currency (`sqlalchemy.String`): Wallet currency.
+        balance (`sqlalchemy.Numeric`): Wallet balance.
+        created_at (`sqlalchemy.Datetime`): Date created.
+        updated_at (`sqlalchemy.Datetime`): Date modified.
     """
     __tablename__ = "wallets"
 
-    id = Column(Integer, primary_key=True, index=True)
+    id = Column(Integer, primary_key=True)
     user_id = Column(Integer, ForeignKey("users.id", ondelete="CASCADE"), nullable=False, index=True)
     currency = Column(String(10), nullable=False)
     balance = Column(Numeric(18, 2), nullable=False, default=0)

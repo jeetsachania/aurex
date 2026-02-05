@@ -6,17 +6,18 @@ from app.db.database import Base
 
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 
+
 class User(Base):
     """
     User Model
 
     Attributes:
-        id (`int`): Auto-incremented unique ID.
-        firstname (`str`): User's firstname.
-        lastname (`str`): User's lastname.
-        email (`str`): User's email address.
-        username (`str`): User's username.
-        hashed_password (`str`): User's password.
+        id (`sqlalchemy.Serial`): Auto-incremented unique ID.
+        firstname (`sqlalchemy.String`): User's firstname.
+        lastname (`sqlalchemy.String`): User's lastname.
+        email (`sqlalchemy.String`): User's email address.
+        username (`sqlalchemy.String`): User's username.
+        hashed_password (`sqlalchemy.String`): User's password.
 
     Methods:
         `verify_password(password: str) -> bool`:
@@ -24,7 +25,7 @@ class User(Base):
     """
     __tablename__ = "users"
 
-    id = Column(Integer, primary_key=True, index=True)
+    id = Column(Integer, primary_key=True)
     firstname = Column(String, unique=False, index=True)
     lastname = Column(String, unique=False, index=True)
     email = Column(String, unique=True, index=True)
