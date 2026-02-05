@@ -1,5 +1,24 @@
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 from typing import Literal, Optional
+
+
+class CurrencyCreate(BaseModel):
+    """
+    CurrencyCreate Schema.
+
+    Attributes:
+        type (`str`): Fiat or commodity currency.
+        code (`str`): ISO currency code.
+        name (`str`): Human-readable currency name.
+        symbol (`str`): Currency symbol.
+        decimals (`int`): Number of decimal places to use.
+    """
+    type: str
+    code: str
+    name: str
+    symbol: str
+    decimals: Optional[int] = Field(default=2, ge=0, le=10)
+
 
 class CurrencyResponse(BaseModel):
     """
