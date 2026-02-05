@@ -1,13 +1,10 @@
 from decimal import Decimal
 
 from fastapi import HTTPException
-from sqlalchemy.exc import IntegrityError
 from sqlalchemy.orm import Session
 
-from app.api.deps import get_current_user
-from app.db.database import get_db
-from app.models.user import User
 from app.models.wallet import Wallet
+
 
 def get(db: Session, user_id: int, currency: str) -> Wallet:
     """
@@ -129,28 +126,3 @@ def validate_delete(wallet: Wallet):
     """
     if wallet.balance > 0:
         raise HTTPException(400, "Wallet has positive balance")
-
-
-def commit_wallet(db: Session, wallet: Wallet):
-    """
-    Commit wallet changes to the database.
-
-    Args:
-        db (`Session`): SQLAlchemy database session.
-        wallet (`Wallet`): The Wallet object.
-
-    Returns:
-        wallet (`Wallet`): The updated Wallet object.
-
-    Raises:
-        `IntegrityError`:
-            - `400`: If the database operation fails.
-    """
-    try:
-        db.add(wallet)
-        db.commit()
-        db.refresh(wallet)
-        return wallet
-    except IntegrityError:
-        db.rollback()
-        raise HTTPException(400, "Database operation failed")
