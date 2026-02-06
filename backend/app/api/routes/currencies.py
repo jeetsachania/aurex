@@ -4,7 +4,7 @@ from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy.orm import Session
 
 from app.api.deps import get_current_user
-from app.crud.currency import get_all, exists
+from app.crud.currency import get_all_currencies, exists, get_additional_currencies
 from app.crud.utils import commit
 from app.db.database import get_db
 from app.models.user import User
@@ -45,6 +45,36 @@ def add(currency: CurrencyCreate, db: Session = Depends(get_db)):
     return commit(db, new_currency)
 
 
+@router.get("/all", response_model=List[CurrencyResponse], status_code=status.HTTP_200_OK)
+def get_all(user: User = Depends(get_current_user), db: Session = Depends(get_db)) -> List[Currency]:
+    """
+    Fetch all currencies.
+
+    Args:
+        user (`User`): The current user.
+        db (`Session`): SQLAlchemy database session.
+
+    Returns:
+        `list[Currency]`: List of all currency objects.
+    """
+    return get_all_currencies(db)
+
+
+@router.get("/available", response_model=List[CurrencyResponse], status_code=status.HTTP_200_OK)
+def get_available(user: User = Depends(get_current_user), db: Session = Depends(get_db)) -> List[Currency]:
+    """
+    Fetch all currencies.
+
+    Args:
+        user (`User`): The current user.
+        db (`Session`): SQLAlchemy database session.
+
+    Returns:
+        `list[Currency]`: List of all currency objects.
+    """
+    return get_additional_currencies(db, user.id)
+
+
 @router.delete("/{code}", status_code=status.HTTP_204_NO_CONTENT)
 def delete(code: str, db: Session = Depends(get_db)):
     # ADMIN ONLY
@@ -58,21 +88,6 @@ def delete(code: str, db: Session = Depends(get_db)):
     db.delete(currency)
     db.commit()
     return
-
-
-@router.get("/all", response_model=List[CurrencyResponse], status_code=status.HTTP_200_OK)
-def get_all_currencies(user: User = Depends(get_current_user), db: Session = Depends(get_db)) -> List[Currency]:
-    """
-    Fetch all currencies.
-
-    Args:
-        user (`User`): The current user.
-        db (`Session`): SQLAlchemy database session.
-
-    Returns:
-        `list[Currency]`: List of all currency objects.
-    """
-    return get_all(db)
 
 
 @router.get("/{code}", response_model=CurrencyResponse, status_code=status.HTTP_200_OK)
