@@ -6,12 +6,77 @@ import { toastSuccess, toastError } from "../../components/ToastNotification";
 import { fetchWithAuth } from "../../api/authFetch";
 import { postWithAuth } from "../../api/authFetch";
 
+import AddWalletModal from "../../components/dashboard/AddWalletModal";
 import TransactionModal from "../../components/dashboard/TransactionModal";
 
 interface WalletCardProps {
   currency: string;
   balance: string;
 }
+
+type Currency = {
+  id: number;
+  code: string;
+  name: string;
+  symbol: string;
+  decimals: number;
+  is_active: boolean;
+};
+
+const AddWallet: React.FC<{ onWalletAdded: () => void }> = ({
+  onWalletAdded,
+}) => {
+  const [open, setOpen] = React.useState(false);
+  const [currencies, setCurrencies] = React.useState<Currency[]>([]);
+
+  React.useEffect(() => {
+    if (!open) return;
+
+    fetchWithAuth("http://localhost:8000/currencies/available")
+      .then((res) => res.json())
+      .then((data) => setCurrencies(data))
+      .catch(() => toastError("Failed to load currencies"));
+  }, [open]);
+
+  const handleAddWallet = async (currency: string) => {
+    try {
+      const res = await postWithAuth("http://localhost:8000/wallets", {
+        currency,
+      });
+
+      if (!res.ok) {
+        toastError("Failed to add wallet");
+        return;
+      }
+
+      toastSuccess("Wallet added");
+      setOpen(false);
+      onWalletAdded();
+    } catch {
+      toastError("Error adding wallet");
+    }
+  };
+
+  return (
+    <>
+      <button
+        className="wallet-button mb-3"
+        id="add"
+        aria-label="Add"
+        onClick={() => setOpen(true)}
+      >
+        <i className="bi bi-plus"></i>
+      </button>
+
+      <AddWalletModal
+        isOpen={open}
+        currencies={currencies}
+        onClose={() => setOpen(false)}
+        onConfirm={handleAddWallet}
+      />
+    </>
+  );
+};
 
 function WalletCard({ currency, balance }: WalletCardProps) {
   const [modalOpen, setModalOpen] = React.useState(false);
@@ -85,22 +150,25 @@ function WalletCard({ currency, balance }: WalletCardProps) {
 const Wallets: React.FC = () => {
   const [wallets, setWallets] = React.useState<WalletCardProps[]>([]);
   const [error, setError] = React.useState(false);
-  const showNoWallets = error || wallets.length === 0;
 
-  React.useEffect(() => {
+  const loadWallets = () => {
     fetchWithAuth("http://localhost:8000/wallets/list")
       .then((res) => {
-        if (!res.ok) throw new Error("Failed to fetch wallets");
+        if (!res.ok) throw new Error();
         return res.json();
       })
-      .then((data) => setWallets(data))
+      .then(setWallets)
       .catch(() => setError(true));
-  }, []);
+  };
+
+  React.useEffect(loadWallets, []);
+
+  const showNoWallets = error || wallets.length === 0;
 
   return (
     <div>
       <h3 className="custom-header">Wallets</h3>
-
+      <AddWallet onWalletAdded={loadWallets} />
       <div className="row g-3 mb-3 align-items-stretch">
         {showNoWallets ? (
           <div className="col-12">
@@ -111,7 +179,11 @@ const Wallets: React.FC = () => {
           </div>
         ) : (
           wallets.map((wallet) => (
-            <WalletCard currency={wallet.currency} balance={wallet.balance} />
+            <WalletCard
+              key={wallet.currency}
+              currency={wallet.currency}
+              balance={wallet.balance}
+            />
           ))
         )}
       </div>
