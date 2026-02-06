@@ -44,6 +44,50 @@ def create(currency: str = Body(..., embed=True), user: User = Depends(get_curre
     return commit(db, wallet)
 
 
+@router.get("/list", response_model=List[WalletResponse], status_code=status.HTTP_200_OK)
+def get_wallets(user: User = Depends(get_current_user), db: Session = Depends(get_db)):
+    """
+    Fetches all wallets for the given user.
+
+    Args:
+        user (`User`): The current user.
+        db (`Session`): SQLAlchemy database session.
+
+    Returns:
+        `sqlalchemy.sql.expression.ColumnElement`: All wallets for the given user.
+    """
+    return get_all(db, user.id)
+
+
+@router.delete("/{currency}", status_code=status.HTTP_204_NO_CONTENT)
+def delete(currency: str, user: User = Depends(get_current_user), db: Session = Depends(get_db)):
+    """
+    Delete a wallet.
+
+    Removes the wallet with the given currency associated with the current user.
+    If the wallet does not exist or has a balance greater than zero,
+    an exception is raised, else the wallet is removed.
+
+    Args:
+        currency (`str`): The currency of the wallet.
+        user (`User`): The current user.
+        db (`Session`): SQLAlchemy database session.
+
+    Returns:
+        None: Returns `HTTP_204_NO_CONTENT` on successful deletion.
+
+    Raises:
+        `HTTPException`:
+            - `400`: If the wallet balance is greater than zero.
+            - `400`: If the database operation fails.
+    """
+    wallet = get(db, user_id=user.id, currency=currency)
+    validate_delete(wallet)
+    db.delete(wallet)
+    db.commit()
+    return
+
+
 @router.post("/{currency}/deposit", response_model=WalletResponse, status_code=status.HTTP_200_OK)
 def deposit(currency: str, amount: Decimal = Body(..., embed=True), user: User = Depends(get_current_user), db: Session = Depends(get_db)):
     """
@@ -100,47 +144,3 @@ def withdraw(currency: str, amount: Decimal = Body(..., embed=True), user: User 
     validate_withdrawal(wallet, amount)
     wallet.balance -= amount
     return commit(db, wallet)
-
-
-@router.delete("/{currency}", status_code=status.HTTP_204_NO_CONTENT)
-def delete(currency: str, user: User = Depends(get_current_user), db: Session = Depends(get_db)):
-    """
-    Delete a wallet.
-
-    Removes the wallet with the given currency associated with the current user.
-    If the wallet does not exist or has a balance greater than zero,
-    an exception is raised, else the wallet is removed.
-
-    Args:
-        currency (`str`): The currency of the wallet.
-        user (`User`): The current user.
-        db (`Session`): SQLAlchemy database session.
-
-    Returns:
-        None: Returns `HTTP_204_NO_CONTENT` on successful deletion.
-
-    Raises:
-        `HTTPException`:
-            - `400`: If the wallet balance is greater than zero.
-            - `400`: If the database operation fails.
-    """
-    wallet = get(db, user_id=user.id, currency=currency)
-    validate_delete(wallet)
-    db.delete(wallet)
-    db.commit()
-    return
-
-
-@router.get("/list", response_model=List[WalletResponse], status_code=status.HTTP_200_OK)
-def get_wallets(user: User = Depends(get_current_user), db: Session = Depends(get_db)):
-    """
-    Fetches all wallets for the given user.
-
-    Args:
-        user (`User`): The current user.
-        db (`Session`): SQLAlchemy database session.
-
-    Returns:
-        `sqlalchemy.sql.expression.ColumnElement`: All wallets for the given user.
-    """
-    return get_all(db, user.id)
