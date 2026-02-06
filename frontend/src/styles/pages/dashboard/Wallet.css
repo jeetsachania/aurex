@@ -12,15 +12,15 @@
   transition: opacity 0.2s ease, transform 0.2s ease;
 }
 
+.wallet-card .card-text {
+  font-size: 1rem;
+}
+
 .wallet-card:hover .wallet-icons,
 .wallet-card:focus-within .wallet-icons {
   opacity: 1;
   transform: translateY(0);
   pointer-events: auto;
-}
-
-.wallet-card .card-text {
-  font-size: 1rem;
 }
 
 .wallet-button {
@@ -38,12 +38,8 @@
   transition: var(--transition-smooth);
 }
 
-.wallet-button:hover,
-.wallet-button:focus {
-  color: #fff;
-  outline: none;
-}
-
+#add:hover,
+#add:focus,
 #deposit:hover,
 #deposit:focus {
   background-color: var(--color-success);
