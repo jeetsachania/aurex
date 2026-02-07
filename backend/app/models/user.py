@@ -32,8 +32,16 @@ class User(Base):
     username = Column(String, unique=True, index=True)
     hashed_password = Column(String)
 
+    # Delete user wallets if the user does not exist
     wallets = relationship(
         "Wallet",
+        back_populates="user",
+        cascade="all, delete-orphan",
+    )
+
+    # Delete user orders if the user does not exist
+    orders = relationship(
+        "Order",
         back_populates="user",
         cascade="all, delete-orphan",
     )

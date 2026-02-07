@@ -1,0 +1,66 @@
+from sqlalchemy import (
+    Column,
+    DateTime,
+    Enum,
+    ForeignKey,
+    func,
+    Integer,
+    Numeric,
+    String
+)
+from sqlalchemy.orm import relationship
+
+from app.db.database import Base
+
+
+order_status_enum = Enum(
+    "PENDING",
+    "CANCELLED",
+    "FILLED",
+    "EXPIRED",
+    name="order_status"
+)
+
+order_type_enum = Enum(
+    "BUY",
+    "SELL",
+    name="order_type"
+)
+
+asset_type_enum = Enum(
+    "COMMODITY",
+    "STOCK",
+    name="asset_type"
+)
+
+
+class Order(Base):
+    """
+    Order Model
+
+    Attributes:
+        id (`sqlalchemy.Serial`): Auto-incremented unique ID
+        user_id (`sqlalchemy.Integer`): User ID
+        asset_type (`sqlalchemy.String`): Type of asset
+        asset (`sqlalchemy.String`): Asset name
+        order_type (`sqlalchemy.String`): Trade type
+        quantity (`sqlalchemy.Integer`): Quantity
+        price (`sqlalchemy.Integer`): Price
+        order_status (`sqlalchemy.String`): Trade status
+        created_at (`sqlalchemy.Datetime`): Date created
+        updated_at (`sqlalchemy.Datetime`): Date modified
+    """
+    __tablename__ = "orders"
+
+    id = Column(Integer, primary_key=True)
+    user_id = Column(Integer, ForeignKey("users.id", ondelete="CASCADE"), nullable=False, index=True)
+    asset_type = Column(asset_type_enum, nullable=False)
+    asset = Column(String, nullable=False)
+    order_type = Column(order_type_enum, nullable=False)
+    quantity = Column(Integer, nullable=False)
+    price = Column(Numeric(precision=12, scale=2), nullable=False)
+    order_status = Column(order_status_enum, nullable=False, server_default="PENDING", index=True)
+    created_at = Column(DateTime(timezone=True), nullable=False, server_default=func.now(), index=True)
+    updated_at = Column(DateTime(timezone=True), nullable=False, server_default=func.now(), onupdate=func.now())
+
+    user = relationship("User", back_populates="orders")
