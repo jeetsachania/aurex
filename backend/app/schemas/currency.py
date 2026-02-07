@@ -1,17 +1,18 @@
-from pydantic import BaseModel, Field
 from typing import Literal, Optional
+
+from pydantic import BaseModel, Field
 
 
 class CurrencyCreate(BaseModel):
     """
-    CurrencyCreate Schema.
+    CurrencyCreate Schema
 
     Attributes:
-        type (`str`): Fiat or commodity currency.
-        code (`str`): ISO currency code.
-        name (`str`): Human-readable currency name.
-        symbol (`str`): Currency symbol.
-        decimals (`int`): Number of decimal places to use.
+        type (`str`): Fiat or commodity currency
+        code (`str`): ISO currency code
+        name (`str`): Human-readable currency name
+        symbol (`str`): Currency symbol
+        decimals (`int`): Number of decimal places to use
     """
     type: str
     code: str
@@ -22,16 +23,16 @@ class CurrencyCreate(BaseModel):
 
 class CurrencyResponse(BaseModel):
     """
-    CurrencyResponse Schema.
+    CurrencyResponse Schema
 
     Attributes:
-        id (`int`): Auto-incremented unique ID.
-        type (`str`): Fiat or commodity currency.
-        code (`str`): ISO currency code.
-        name (`str`): Human-readable currency name.
-        symbol (`str`): Currency symbol.
-        decimals (`int`): Number of decimal places to use.
-        is_active (`bool`): Currently usable.
+        id (`int`): Auto-incremented unique ID
+        type (`str`): Fiat or commodity
+        code (`str`): ISO currency code
+        name (`str`): Human-readable currency name
+        symbol (`str`): Currency symbol
+        decimals (`int`): Number of decimal places to use
+        is_active (`bool`): Currently usable
     """
     id: int
     type: Literal["fiat", "commodity"]
@@ -43,6 +44,6 @@ class CurrencyResponse(BaseModel):
 
     class Config:
         """
-        Parse the SQLAlchemy ORM model into a Pydantic model.
+        Parse the SQLAlchemy ORM model into a Pydantic model
         """
         orm_mode = True
