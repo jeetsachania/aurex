@@ -15,7 +15,7 @@ const UserSettingsForm: React.FC<Props> = ({ email, username }) => {
           </div>
           <input
             type="text"
-            className="form-control custom-form-input"
+            className="form-control custom-form-input p-3"
             id="email"
             value={email ?? ""}
             disabled
@@ -30,7 +30,7 @@ const UserSettingsForm: React.FC<Props> = ({ email, username }) => {
         </div>
         <input
           type="text"
-          className="form-control custom-form-input"
+          className="form-control custom-form-input p-3"
           id="username"
           value={username ?? ""}
           disabled

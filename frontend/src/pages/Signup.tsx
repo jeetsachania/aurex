@@ -115,11 +115,11 @@ const Signup: React.FC = () => {
   return (
     <div className="container-fluid">
       <ToastContainer position="top-center" />
-      <div className="container custom-form-container">
-        <div className="card custom-form-card">
+      <div className="form-container">
+        <div className="card form-card">
           <div className="card-body">
             <Logo additionalClassName="shimmer" redirectTo="/" />
-            <h2 className="card-title custom-form-card-title">Signup</h2>
+            <h2 className="card-title form-card-title">Signup</h2>
             <form onSubmit={handleFormSubmit}>
               <div className="row">
                 <div className="col-md-6 mb-3">
@@ -131,7 +131,7 @@ const Signup: React.FC = () => {
                     </div>
                     <input
                       type="text"
-                      className="form-control custom-form-input"
+                      className="form-control form-input p-3"
                       id="firstname"
                       placeholder="First Name"
                       value={firstname}
@@ -149,7 +149,7 @@ const Signup: React.FC = () => {
                     </div>
                     <input
                       type="text"
-                      className="form-control custom-form-input"
+                      className="form-control form-input p-3"
                       id="lastname"
                       placeholder="Last Name"
                       value={lastname}
@@ -169,7 +169,7 @@ const Signup: React.FC = () => {
                     </div>
                     <input
                       type="text"
-                      className="form-control custom-form-input"
+                      className="form-control form-input p-3"
                       id="email"
                       placeholder="Email"
                       value={email}
@@ -187,7 +187,7 @@ const Signup: React.FC = () => {
                     </div>
                     <input
                       type="text"
-                      className="form-control custom-form-input"
+                      className="form-control form-input p-3"
                       id="confirm-email"
                       placeholder="Confirm Email"
                       value={confirmEmail}
@@ -206,7 +206,7 @@ const Signup: React.FC = () => {
                   </div>
                   <input
                     type="text"
-                    className="form-control custom-form-input"
+                    className="form-control form-input p-3"
                     id="username"
                     placeholder="Username"
                     value={username}
@@ -233,7 +233,7 @@ const Signup: React.FC = () => {
                     </div>
                     <input
                       type={isPasswordVisible ? "text" : "password"}
-                      className="form-control custom-form-input"
+                      className="form-control form-input p-3"
                       id="password"
                       placeholder="Password"
                       value={password}
@@ -259,7 +259,7 @@ const Signup: React.FC = () => {
                     </div>
                     <input
                       type={isPasswordVisible ? "text" : "password"}
-                      className="form-control custom-form-input"
+                      className="form-control form-input p-3"
                       id="confirm-password"
                       placeholder="Confirm Password"
                       value={confirmPassword}
@@ -271,7 +271,7 @@ const Signup: React.FC = () => {
               </div>
               <button
                 type="submit"
-                className="rounded-pill custom-button custom-form-button confirm mt-3"
+                className="rounded-pill button confirm w-100 mt-3"
               >
                 Signup
               </button>
@@ -279,7 +279,7 @@ const Signup: React.FC = () => {
             <hr className="solid"></hr>
             <button
               type="submit"
-              className="rounded-pill custom-button custom-form-button redirect"
+              className="rounded-pill button redirect w-100"
               onClick={handleRedirect}
             >
               Login

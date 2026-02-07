@@ -1,11 +1,9 @@
 import React from "react";
 
-import { ToastContainer } from "react-toastify";
-import { toastSuccess, toastError } from "../../components/ToastNotification";
-
 import { fetchWithAuth } from "../../api/authFetch";
 import { postWithAuth } from "../../api/authFetch";
 
+import { toastSuccess, toastError } from "../../components/ToastNotification";
 import AddWalletModal from "../../components/dashboard/AddWalletModal";
 import TransactionModal from "../../components/dashboard/TransactionModal";
 
@@ -101,7 +99,6 @@ function WalletCard({ currency, balance }: WalletCardProps) {
 
   return (
     <div className="col-4 col-md-3 col-lg-2 col-xl-2 col-xxl-2 col-xxxl-1 d-flex">
-      <ToastContainer position="top-center" />
       <div className="card dashboard-card wallet-card w-100" tabIndex={0}>
         <div className="card-body d-flex flex-column justify-content-between">
           <h6 className="card-title">{currency}</h6>
@@ -173,8 +170,7 @@ const Wallets: React.FC = () => {
         {showNoWallets ? (
           <div className="col-12">
             <div className="card text-center p-4">
-              <h5>No wallets</h5>
-              <p className="text-muted">No Wallets</p>
+              <h5>No Wallets</h5>
             </div>
           </div>
         ) : (

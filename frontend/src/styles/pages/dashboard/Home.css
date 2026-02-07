@@ -4,13 +4,13 @@
 }
 
 .rounded-table {
-  border-radius: 1rem;
+  border-radius: var(--br-s);
   overflow: hidden;
 }
 
 .rounded-table thead {
   font-family: 'Orbitron';
-  font-size: 0.75rem;
+  font-size: var(--font-size-xs);
   border-radius: 0.5rem 0.5rem 0.5rem 0.5rem;
   letter-spacing: var(--letter-spacing-s);
 }

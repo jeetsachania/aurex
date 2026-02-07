@@ -14,7 +14,7 @@
   transition: var(--transition-smooth);
 }
 
-.custom-navbar .custom-button {
+.custom-navbar .button {
   font-family: 'Orbitron';
 }
 
@@ -27,8 +27,8 @@
   color: var(--color-accent-primary);
 }
 
-.nav-link:not(#theme-toggle):not(.custom-button)::before,
-.nav-link:not(#theme-toggle):not(.custom-button)::after {
+.nav-link:not(#theme-toggle):not(.button)::before,
+.nav-link:not(#theme-toggle):not(.button)::after {
   content: "";
   position: absolute;
   display: block;
@@ -38,22 +38,22 @@
   transition: all 0.3s ease;
 }
 
-.nav-link:not(#theme-toggle):not(.custom-button)::after {
+.nav-link:not(#theme-toggle):not(.button)::after {
   top: 0;
   left: 0;
   border-top: 2px solid transparent;
   border-left: 2px solid transparent;
 }
 
-.nav-link:not(#theme-toggle):not(.custom-button)::before {
+.nav-link:not(#theme-toggle):not(.button)::before {
   right: 0;
   bottom: 0;
   border-bottom: 2px solid transparent;
   border-right: 2px solid transparent;
 }
 
-.nav-link:not(#theme-toggle):not(.custom-button):hover::before,
-.nav-link:not(#theme-toggle):not(.custom-button):hover::after {
+.nav-link:not(#theme-toggle):not(.button):hover::before,
+.nav-link:not(#theme-toggle):not(.button):hover::after {
   width: 10px;
   height: 10px;
   border-color: var(--color-accent-primary);

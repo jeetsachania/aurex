@@ -25,7 +25,3 @@
   letter-spacing: var(--letter-spacing-s);
   margin: 1rem 0;
 }
-
-.hero .custom-button {
-  font-family: 'Consolas';
-}

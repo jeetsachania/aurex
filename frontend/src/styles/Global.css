@@ -9,7 +9,7 @@
   /* --bg-color: #030810; */
   /* --bg-color: #080b15; */
   --color-text: #EAEAEA;
-  --color-text-grey: #A0A0A0;
+  --grey: #A0A0A0;
   --color-navbar-bg: #00000000;
   --color-link: #FFFFFF;
   --color-link-hover-bg: #37373E;
@@ -28,6 +28,9 @@
   --letter-spacing-s: 1px;
   --letter-spacing-m: 2px;
 
+  --br-card: 1rem;
+  --br-s: 0.5rem;
+
   /* Transitions */
   --transition-fast: background-color 0.2s ease, color 0.2s ease;
   --transition-smooth: background-color 0.5s ease, color 0.5s ease;
@@ -36,15 +39,15 @@
 /* Responsive Design: Tablet - Desktop */
 @media (min-width: 768px) and (max-width: 1023px) {
   .hero h1 {
-    font-size: 3rem;
+    font-size: var(--font-size-l);
   }
 
   .hero p {
-    font-size: 0.9rem;
+    font-size: var(--font-size-s);
   }
 
   .hero button {
-    font-size: 1.2rem;
+    font-size: var(--font-size-s);
   }
 
   .line-break {
@@ -59,11 +62,11 @@
   }
 
   .hero p {
-    font-size: 1rem;
+    font-size: var(--font-size-s);
   }
 
   .hero button {
-    font-size: 1.5rem;
+    font-size: var(--font-size-s);
   }
 
   .line-break {
@@ -71,29 +74,14 @@
   }
 }
 
-/* Responsive Design: Mobile First */
-/* body {
-  font-family: 'Roboto Regular', sans-serif;
-  font-size: 1rem;
-  margin: 0;
-  padding: 0;
-  background-color: var(--bg-color);
-  color: var(--color-text);
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
-  min-height: 100vh;
-  transition: none;
-} */
-
 body {
   font-family: 'Roboto Regular', sans-serif;
-  font-size: 1rem;
+  font-size: var(--font-size-s);
   margin: 0;
   padding: 0;
   background-color: var(--bg-color);
   color: var(--color-text);
-  display: block; /* Changed from flex to block, since flex is not needed for body anymore */
+  display: block;
   min-height: 100vh;
   transition: none;
 }
@@ -101,11 +89,11 @@ body {
 .default-container {
   height: 100vh;
   width: 100%;
-  max-width: 1200px; /* Optional: You can set a max-width if you want to limit the container width */
-  margin: 0 auto; /* This centers the container horizontally */
+  max-width: 1200px;
+  margin: 0 auto;
   scroll-margin-top: 3rem;
-  display: block; /* Ensures that sections are not forced to display as flex by default */
-  padding: 20px; /* Optional: to add padding within the container */
+  display: block;
+  padding: 20px;
 }
 
 body.theme-transition {
@@ -117,7 +105,7 @@ body.light-mode {
   --bg-gradient: linear-gradient(180deg, #F5F6FA, #E0E0E0);
   --bg-color: #f0f0f0;
   --color-text: #1F1F1F;
-  --color-text-grey: #6B6B6B;
+  --grey: #6B6B6B;
   --color-navbar-bg: #00000000;
   --color-link: #222222;
   --color-link-hover-bg: #E0E0E0;
@@ -131,12 +119,6 @@ body.light-mode {
 html {
   scroll-padding-top: 5rem;
 }
-
-/* .default-container {
-  height: 100vh;
-  width: 100%;
-  scroll-margin-top: 3rem;
-} */
 
 .line-break {
   display: none;

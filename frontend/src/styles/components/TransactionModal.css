@@ -11,32 +11,38 @@
 .transaction-card {
   background: white;
   padding: 1.5rem;
-  border-radius: 8px;
+  border-radius: var(--br-card);
   width: 100%;
   max-width: 400px;
 }
 
 .transaction-card .card-title {
-  font-family: 'Orbitron';
+  font-family: "Orbitron";
   font-weight: bold;
   font-size: 1.25rem;
   letter-spacing: var(--letter-spacing-m);
 }
 
 .transaction-card .card-text {
-  font-family: 'Orbitron';
-  font-size: 0.75rem;
+  font-family: "Orbitron";
+  font-size: var(--font-size-xs);
   white-space: nowrap;
   letter-spacing: var(--letter-spacing-s);
 }
 
-.error {
-  color: red
+.transaction-card > .list-group {
+  border: none;
+  border-radius: var(--br-s);
 }
 
-.modal-button {
-  width: 100%;
-  font-family: 'Orbitron';
-  letter-spacing: var(--letter-spacing-m);
-  transition: var(--transition-smooth);
+.transaction-card > .list-group > .list-group-item-action {
+  transition: var(--transition-fast);
+}
+
+.transaction-card > .list-group > .list-group-item-action:not(.active):hover {
+  background-color: lightgray;
+}
+
+.form-select {
+  border-radius: var(--br-card);
 }

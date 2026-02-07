@@ -1,5 +1,6 @@
 import React from "react";
 import Wallets from "./Wallets";
+import Orders from "./Orders";
 
 interface KpiCardProps {
   title: string;
@@ -84,63 +85,8 @@ const Home: React.FC = () => {
       <div className="container-fluid">
         <Wallets />
       </div>
-      <div className="row g-3">
-        <div className="col-lg-12">
-          <div className="row">
-            <div className="col-md-12">
-              <div className="table-responsive rounded-table">
-                <table className="table table-striped align-middle mb-0">
-                  <thead className="table-dark">
-                    <tr>
-                      <th>COMMODITY</th>
-                      <th>PRICE</th>
-                      <th>QTY</th>
-                      <th>DATE</th>
-                      <th>STATUS</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td>GOOGL</td>
-                      <td>125.21</td>
-                      <td>2</td>
-                      <td>13/02/2025</td>
-                      <td>Unfulfilled</td>
-                    </tr>
-                    <tr>
-                      <td>NFLX</td>
-                      <td>212.14</td>
-                      <td>3</td>
-                      <td>14/03/2025</td>
-                      <td>Unfulfilled</td>
-                    </tr>
-                    <tr>
-                      <td>AMZN</td>
-                      <td>276.82</td>
-                      <td>1</td>
-                      <td>25/05/2025</td>
-                      <td>Unfulfilled</td>
-                    </tr>
-                    <tr>
-                      <td>QCOM</td>
-                      <td>332.17</td>
-                      <td>3</td>
-                      <td>09/06/2025</td>
-                      <td>Unfulfilled</td>
-                    </tr>
-                    <tr>
-                      <td>AAPL</td>
-                      <td>312.45</td>
-                      <td>5</td>
-                      <td>28/12/2025</td>
-                      <td>Unfulfilled</td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-            </div>
-          </div>
-        </div>
+      <div className="container-fluid">
+        <Orders />
       </div>
     </div>
   );

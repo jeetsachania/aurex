@@ -15,6 +15,14 @@
   src: url('../assets/fonts/Lexend_Peta/static/LexendPeta-Regular.ttf');
 }
 
+:root {
+  --font-size-xs: 0.75rem;
+  --font-size-s: 1rem;
+  --font-size-m: 2rem;
+  --font-size-l: 3rem;
+  --font-size-xl: 3.5rem;
+}
+
 .custom-header {
   font-family: 'Orbitron';
   letter-spacing: var(--letter-spacing-s);
@@ -24,9 +32,9 @@
   font-family: 'Consolas';
   font-size: 0.8rem;
   margin: 1rem 0;
-  color: var(--color-text-grey);
+  color: var(--grey);
 }
 
-.limited-feature {
+.danger {
   color: var(--color-danger);
 }

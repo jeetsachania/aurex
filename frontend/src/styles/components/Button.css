@@ -1,26 +1,27 @@
-.custom-button {
+.button {
   padding: 0.5rem 1rem;
   border: none;
-  border-radius: 0.5rem;
+  border-radius: var(--br-card);
   color: white;
-  font-size: 1rem;
-  /* font-weight: 500; */
+  font-size: var(--font-size-s);
   cursor: pointer;
   position: relative;
   overflow: hidden;
+  font-family: 'Orbitron';
+  letter-spacing: var(--letter-spacing-s);
 }
 
-.custom-button::after {
+.button::after {
   content: "";
   position: absolute;
   inset: 0;
-  background: rgba(0, 0, 0, 0.08);
+  background: rgba(0, 0, 0, 0.20);
   opacity: 0;
   transition: opacity 0.2s ease;
   pointer-events: none;
 }
 
-.custom-button:hover::after {
+.button:hover::after {
   opacity: 1;
 }
 
@@ -38,4 +39,27 @@
 
 .redirect {
   background-color: var(--color-button-primary);
+}
+
+/* Radio Styled Button */
+.custom-radio {
+  display: flex;
+}
+
+.radio {
+  font-size: var(--font-size-xs);
+  letter-spacing: var(--letter-spacing-m);
+  cursor: pointer;
+  padding: 0.5rem 1rem;
+  background-color: var(--bs-primary);
+  user-select: none;
+  transition: var(--transition-fast);
+}
+
+.radio input {
+  display: none;
+}
+
+.radio.active {
+  background-color: var(--bs-success);
 }

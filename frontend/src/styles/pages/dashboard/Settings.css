@@ -1,17 +1,6 @@
-.settings {
-  /* max-width: fit-content; */
-  /* max-width: 60vw;
-  margin-left: auto;
-  margin-right: auto; */
-}
-
-.settings .custom-form-container {
+.settings .form-container {
   height: inherit;
   padding-top: 3rem;
-}
-
-.settings .custom-form-input {
-  /* background-color: rgb(211, 211, 211); */
 }
 
 .settings .input-group-text {

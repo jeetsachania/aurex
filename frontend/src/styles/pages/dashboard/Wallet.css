@@ -13,7 +13,7 @@
 }
 
 .wallet-card .card-text {
-  font-size: 1rem;
+  font-size: var(--font-size-s);
 }
 
 .wallet-card:hover .wallet-icons,
@@ -34,7 +34,7 @@
   justify-content: center;
   cursor: pointer;
   padding: 0;
-  font-size: 1rem;
+  font-size: var(--font-size-s);
   transition: var(--transition-smooth);
 }
 

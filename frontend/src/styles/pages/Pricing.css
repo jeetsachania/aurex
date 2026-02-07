@@ -1,6 +1,6 @@
 .pricing-card {
   border: none;
-  border-radius: 1rem;
+  border-radius: var(--br-s);
   background-color: var(--color-accent-light-soft);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }

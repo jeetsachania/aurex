@@ -75,11 +75,11 @@ const ResetCredential: React.FC<ResetCredentialProps> = ({
   return (
     <div className="container-fluid">
       <ToastContainer position="top-center" />
-      <div className="container custom-form-container">
-        <div className="card custom-form-card">
+      <div className="form-container">
+        <div className="card form-card">
           <div className="card-body">
             <Logo className="logo" />
-            <h2 className="card-title custom-form-card-title">{label}</h2>
+            <h2 className="card-title form-card-title">{label}</h2>
             <form onSubmit={handleFormSubmit}>
               <div className="mb-3">
                 <div className="input-group">
@@ -90,7 +90,7 @@ const ResetCredential: React.FC<ResetCredentialProps> = ({
                   </div>
                   <input
                     type="text"
-                    className="form-control custom-form-input"
+                    className="form-control form-input p-3"
                     id={action}
                     placeholder="Email"
                     value={email}
@@ -101,7 +101,7 @@ const ResetCredential: React.FC<ResetCredentialProps> = ({
               </div>
               <button
                 type="submit"
-                className="rounded-pill custom-button custom-form-button submit-button mt-3"
+                className="rounded-pill button confirm w-100 mt-3"
               >
                 Send Reset Link
               </button>
@@ -109,7 +109,7 @@ const ResetCredential: React.FC<ResetCredentialProps> = ({
             <hr className="solid"></hr>
             <button
               type="submit"
-              className="rounded-pill custom-button custom-form-button"
+              className="rounded-pill button redirect w-100"
               onClick={handleRedirect}
             >
               Back

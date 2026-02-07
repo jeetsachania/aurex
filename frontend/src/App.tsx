@@ -1,6 +1,8 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
+import { ToastContainer } from "react-toastify";
+
 import "bootstrap/dist/css/bootstrap.min.css";
 import 'bootstrap/dist/js/bootstrap.bundle.min.js'
 import 'react-toastify/dist/ReactToastify.css';
@@ -18,7 +20,6 @@ import "./styles/components/TransactionModal.css";
 
 import "./styles/pages/Home.css";
 import "./styles/pages/Pricing.css";
-import "./styles/pages/Login.css";
 
 import "./styles/pages/dashboard/Dashboard.css";
 import "./styles/pages/dashboard/Home.css";
@@ -36,6 +37,7 @@ import ProtectedRoute from "./components/ProtectedRoute";
 const App: React.FC = () => {
   return (
     <Router>
+      <ToastContainer position="top-center" />
       <Routes>
         <Route path="/" element={<Index />} />
         <Route path="/features" element={<Index scrollTo="features" />} />

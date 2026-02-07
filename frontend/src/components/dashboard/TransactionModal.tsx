@@ -37,12 +37,12 @@ const TransactionModal: React.FC<TransactionModalProps> = ({
     const numericAmount = parseFloat(amount);
 
     if (isNaN(numericAmount) || numericAmount <= 0) {
-      setError("Enter a valid amount");
+      setError("Invalid Amount");
       return;
     }
 
     if (type === "withdraw" && numericAmount > balance) {
-      setError("Insufficient balance");
+      setError("Insufficient Balance");
       return;
     }
 
@@ -65,7 +65,7 @@ const TransactionModal: React.FC<TransactionModalProps> = ({
         <input
           type="text"
           inputMode="decimal"
-          className="form-control custom-form-input"
+          className="form-control form-input p-3"
           placeholder="0.00"
           value={amount}
           autoFocus
@@ -75,23 +75,23 @@ const TransactionModal: React.FC<TransactionModalProps> = ({
           }}
         />
 
-        <h3 className="card-text text-muted mt-2">
-          Balance: {currency} {balance}
+        <h3 className="card-text mt-3 mb-3">
+          BALANCE: {currency} {balance}
         </h3>
 
-        {error && <h3 className="card-text error mt-2">{error}</h3>}
+        {error && <h3 className="card-text danger mb-3">{error}</h3>}
 
-        <div className="d-flex justify-content-start gap-2">
+        <div className="d-flex justify-content-start gap-3">
           <button
             type="submit"
-            className="rounded-pill custom-button modal-button confirm"
+            className="rounded-pill button confirm w-50"
             onClick={handleConfirm}
           >
             Confirm
           </button>
           <button
             type="submit"
-            className="rounded-pill custom-button modal-button cancel"
+            className="rounded-pill button cancel w-50"
             onClick={handleCancel}
           >
             Cancel

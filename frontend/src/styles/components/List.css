@@ -25,6 +25,15 @@
   padding-bottom: 0.25rem;
 }
 
+.order-modal > .list-group-item {
+  border: none;
+  background-color: var(--grey);
+}
+
+.order-modal > li:not(:last-child) {
+  border-bottom: none;
+}
+
 .custom-top-border.list-group,
 .custom-list-group-item {
   border: none;
@@ -33,4 +42,10 @@
 .custom-list li,
 .custom-list-group-item {
   letter-spacing: var(--letter-spacing-s);
+}
+
+.list-group > li {
+  font-family: "Consolas";
+  font-size: var(--font-size-xs);
+  letter-spacing: var(--letter-spacing-m);
 }

@@ -1,87 +1,62 @@
-.custom-form-container {
+.form-container {
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100vh;
-  /* padding-top: 3rem; */ /* Can remove if not displaying nav on login/signup pages */
 }
 
-.custom-form-card {
-  /* width: 100%; */
+.form-card {
   padding: 2rem;
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
   border-radius: 2rem;
   transition: box-shadow 0.3s ease;
 }
 
-.custom-form-card:focus-within {
+.form-card:focus-within {
   box-shadow: 0 10px 20px rgba(var(--color-hover-shadow), 0.5);
 }
 
-.custom-form-card-title {
+.form-card-title {
   font-family: 'Orbitron';
-  font-size: 2rem;
+  font-size: var(--font-size-s);
   margin-bottom: 1.5rem;
   letter-spacing: var(--letter-spacing-s);
 }
 
-.custom-form-input {
+.form-input {
   font-family: 'Roboto Light';
-  height: 3rem;
   width: 100%;
-  padding: 2rem;
-  /* margin: 10px 0; */
   border-radius: 1rem;
   box-sizing: border-box;
   background-color: white;
 }
 
-.custom-form-input:focus {
+.form-input:focus {
   border: 1px solid var(--color-accent-primary);
   outline: none;
   box-shadow: none;
 }
 
-.custom-form-label {
+.form-input.error {
+  border: 1px solid var(--color-danger);
+}
+
+.form-label {
   font-family: 'Orbitron';
+  font-size: 12px;
+  text-decoration: none;
   margin: 0;
   padding: 0;
   letter-spacing: var(--letter-spacing-s);
 }
 
-.custom-form-button {
-  width: 100%;
-  font-family: 'Orbitron';
-  letter-spacing: var(--letter-spacing-s);
+.form-select {
+  font-size: var(--font-size-s);
 }
 
-.submit-button {
-  background-color: var(--color-success);
-}
-
-.reminder {
-  font-family: 'Consolas';
-  font-size: 12px;
-}
-
-.custom-form-input.error {
-  border: 1px solid var(--color-danger);
-}
-
-.text-link {
-  text-decoration: none;
-  color: var(--color-accent-primary);
-}
-
-.text-link:hover {
-  color: var(--color-accent-primary);
-  text-decoration: underline;
-}
-
-hr.solid {
-  border-top: 2px solid gray;
-  border-radius: 1rem;
-  opacity: 0.45;
+.form-select:focus {
+  border-color: var(--color-accent-primary);
+  box-shadow: none;
 }
 
 .input-group-icon {
@@ -105,4 +80,14 @@ hr.solid {
 .input-group-append {
   display: flex;
   align-items: center;
+}
+
+.text-link {
+  text-decoration: none;
+  color: var(--color-accent-primary);
+}
+
+.text-link:hover {
+  color: var(--color-accent-primary);
+  text-decoration: underline;
 }

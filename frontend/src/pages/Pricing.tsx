@@ -121,7 +121,7 @@ const Pricing: React.FC = () => {
               </li>
             </ul>
             <button
-              className="custom-button rounded-pill me-2"
+              className="rounded-pill button default me-2"
               onClick={togglePricingPeriod}
             >
               {isMonthly ? "MONTHLY" : "ANUALLY"}
@@ -151,7 +151,7 @@ const Pricing: React.FC = () => {
                       <i className={`bi ${feature.icon} me-2`}></i>
                       {feature.text}
                       {feature.limited && (
-                        <strong className="limited-feature">*</strong>
+                        <strong className="danger">*</strong>
                       )}
                     </li>
                   ))}
@@ -174,10 +174,10 @@ const Pricing: React.FC = () => {
                   </ul>
                 </div>
                 <div className="card-footer border-0 bg-transparent pt-0 pb-3">
-                  <button className="rounded-pill custom-button default me-2">
+                  <button className="rounded-pill button default me-2">
                     SELECT
                   </button>
-                  <button className="rounded-pill custom-button default">DEMO</button>
+                  <button className="rounded-pill button default">DEMO</button>
                 </div>
               </div>
             </div>
@@ -189,7 +189,7 @@ const Pricing: React.FC = () => {
             <ul className="list-unstyled features-list">
               <li className="d-flex align-items-start">
                 <span className="subtext">
-                  <strong className="limited-feature">*</strong> LIMITED FEATURE
+                  <strong className="danger">*</strong> LIMITED FEATURE
                 </span>
               </li>
             </ul>

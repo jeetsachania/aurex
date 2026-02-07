@@ -1,3 +1,7 @@
+import React from "react";
+
+import BaseModal from "./BaseModal";
+
 type Currency = {
   id: number;
   code: string;
@@ -20,30 +24,37 @@ const AddWalletModal: React.FC<AddWalletModalProps> = ({
   onClose,
   onConfirm,
 }) => {
-  if (!isOpen) return null;
+  const [selectedCurrency, setSelectedCurrency] = React.useState("");
+
+  React.useEffect(() => {
+    if (currencies.length > 0) {
+      setSelectedCurrency(currencies[0].code);
+    }
+  }, [currencies]);
 
   return (
-    <div className="transaction-backdrop">
-      <div className="card transaction-card">
-        <h5>Add Wallet</h5>
-
-        <ul className="list-group">
-          {currencies.map((currency) => (
-            <li
-              key={currency.code}
-              className="list-group-item list-group-item-action"
-              onClick={() => onConfirm(currency.code)}
-            >
-              {currency.code}
-            </li>
-          ))}
-        </ul>
-
-        <button className="btn btn-secondary mt-3" onClick={onClose}>
-          Cancel
-        </button>
-      </div>
-    </div>
+    <BaseModal
+      isOpen={isOpen}
+      title="Add Wallet"
+      onClose={onClose}
+      onConfirm={() => onConfirm(selectedCurrency)}
+    >
+      <select
+        className="form-select form-select-sm mb-3"
+        value={selectedCurrency}
+        onChange={(e) => setSelectedCurrency(e.target.value)}
+      >
+        {currencies.length === 0 ? (
+          <option value="empty">No commodities available</option>
+        ) : (
+          currencies.map((c) => (
+            <option key={c.code} value={c.code}>
+              {c.code}
+            </option>
+          ))
+        )}
+      </select>
+    </BaseModal>
   );
 };
 

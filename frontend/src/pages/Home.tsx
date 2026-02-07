@@ -8,7 +8,7 @@ const Home: React.FC = () => {
           POWERFUL TRADING.<span className="line-break"></span> ZERO HASSLE.
         </h1>
         <button
-          className="rounded-pill custom-button default"
+          className="rounded-pill button default"
           onClick={() => alert("Get Started Clicked!")}
         >
           OPEN YOUR ACCOUNT NOW
