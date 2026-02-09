@@ -1,6 +1,5 @@
 from datetime import datetime
 
-from decimal import Decimal
 from enum import Enum
 from datetime import datetime
 from pydantic import BaseModel
@@ -44,16 +43,16 @@ class OrderResponse(BaseModel):
     OrderResponse Schema
 
     Attributes:
-        id (`sqlalchemy.Serial`): Auto-incremented unique ID
-        user_id (`sqlalchemy.Integer`): User ID
-        asset_type (`sqlalchemy.String`): Type of asset
-        asset (`sqlalchemy.String`): Asset name
-        order_type (`sqlalchemy.String`): Trade type
-        quantity (`sqlalchemy.Integer`): Quantity
-        price (`sqlalchemy.Integer`): Price
-        order_status (`sqlalchemy.String`): Trade status
-        created_at (`sqlalchemy.Datetime`): Date created
-        updated_at (`sqlalchemy.Datetime`): Date modified
+        id (`int`): Auto-incremented unique ID
+        user_id (`int`): User ID
+        asset_type (`str`): Type of asset
+        asset (`str`): Asset name
+        order_type (`str`): Trade type
+        quantity (`int`): Quantity
+        price (`int`): Price
+        order_status (`str`): Trade status
+        created_at (`Datetime`): Date created
+        updated_at (`Datetime`): Date modified
     """
     id: int
     user_id: int
@@ -65,7 +64,6 @@ class OrderResponse(BaseModel):
     order_status: OrderStatus
     created_at: datetime
     updated_at: datetime
-    
 
     class Config:
         """
