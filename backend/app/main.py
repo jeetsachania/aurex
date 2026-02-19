@@ -1,7 +1,7 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
-from app.api.routes import users, wallets, currencies, order, assets
+from app.api.routes import users, wallets, currencies, order, assets, trading_data
 
 origins = [
     "http://localhost:5173",
@@ -14,6 +14,7 @@ app.include_router(wallets.router, prefix="/wallets", tags=["Wallets"])
 app.include_router(currencies.router, prefix="/currencies", tags=["Currencies"])
 app.include_router(order.router, prefix="/orders", tags=["Orders"])
 app.include_router(assets.router, prefix="/assets", tags=["Assets"])
+app.include_router(trading_data.router, prefix="/tradingdata", tags=["TradingData"])
 
 app.add_middleware(
     CORSMiddleware,
