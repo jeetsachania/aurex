@@ -2,6 +2,7 @@ import React from "react";
 
 import { fetchWithAuth } from "../../api/authFetch";
 import { postWithAuth } from "../../api/authFetch";
+import { formatDateTime } from "../../utils/Utils";
 
 import { toastSuccess, toastError } from "../../components/ToastNotification";
 import AddOrderModal from "../../components/dashboard/AddOrderModal";
@@ -10,46 +11,50 @@ import TransactionModal from "../../components/dashboard/TransactionModal";
 type Order = {
   asset_type: string;
   asset: string;
-  quantity: string;
+  order_type: string;
+  quantity: number;
   price: number;
+  order_status: string;
+  created_at: Date;
+  updated_at: Date;
 };
 
-type Commodity = {
-  commodity: string;
-  price: number;
+type Asset = {
+  symbol: string;
+  name: string;
+  asset_type: string;
+  exchange: string;
+  currency: string;
+  active: boolean;
 };
 
 const AddOrder: React.FC<{ onOrderAdded: () => void }> = ({ onOrderAdded }) => {
   const [open, setOpen] = React.useState(false);
-  const [commodities, setCommodities] = React.useState<Commodity[]>([]);
-  const testCommodities = [
-    {
-      commodity: "AAPL",
-      price: "100.00",
-    },
-    {
-      commodity: "GOOGL",
-      price: "100.00",
-    },
-    {
-      commodity: "NFLX",
-      price: "100.00",
-    },
-    {
-      commodity: "AMZN",
-      price: "100.00",
-    },
-    {
-      commodity: "MSFT",
-      price: "100.00",
-    },
-  ];
+  const [assets, setAssets] = React.useState<Asset[]>([]);
 
-  const loadCommodities = () => {
-    setCommodities(testCommodities);
+  const fetchAssets = async () => {
+    try {
+      const res = await fetchWithAuth("http://localhost:8000/assets");
+      if (!res.ok) {
+        toastError("Failed to fetch assets");
+        return;
+      }
+      const data = await res.json();
+      return data;
+    } catch (err) {
+      console.error(err);
+      return [];
+    }
   };
 
-  React.useEffect(loadCommodities, []);
+  const loadCommodities = async () => {
+    const fetchedAssets = await fetchAssets();
+    setAssets(fetchedAssets);
+  };
+
+  React.useEffect(() => {
+    loadCommodities();
+  }, []);
 
   const handleAddOrder = async (modalOrder: {
     type: string;
@@ -69,15 +74,10 @@ const AddOrder: React.FC<{ onOrderAdded: () => void }> = ({ onOrderAdded }) => {
 
     try {
       const res = await postWithAuth("http://localhost:8000/orders", payload);
-
       if (!res.ok) {
         toastError("Failed to add order");
         return;
       }
-
-      const data = await res.json();
-      console.log("Order created:", data);
-
       toastSuccess("Order added");
       setOpen(false);
       onOrderAdded();
@@ -100,7 +100,7 @@ const AddOrder: React.FC<{ onOrderAdded: () => void }> = ({ onOrderAdded }) => {
 
       <AddOrderModal
         isOpen={open}
-        commodities={commodities}
+        commodities={assets}
         onClose={() => setOpen(false)}
         onConfirm={handleAddOrder}
       />
@@ -111,20 +111,32 @@ const AddOrder: React.FC<{ onOrderAdded: () => void }> = ({ onOrderAdded }) => {
 const Orders: React.FC = () => {
   const [orders, setOrders] = React.useState<Order[]>([]);
   const [error, setError] = React.useState(false);
-  const testOrders = [
-    {
-      type: "BUY",
-      order: "Market",
-      commodity: "AAPL",
-      quantity: "10",
-    },
-  ];
+  
+  const fetchOrders = async () => {
+    try {
+      const res = await fetchWithAuth("http://localhost:8000/orders");
 
-  const loadOrders = () => {
-    setOrders(testOrders);
+      if (!res.ok) {
+        toastError("Failed to fetch orders");
+        return;
+      }
+
+      const data = await res.json();
+      return data;
+    } catch (err) {
+      console.error(err);
+      return [];
+    }
   };
 
-  React.useEffect(loadOrders, []);
+  const loadOrders = async () => {
+    const fetchedAssets = await fetchOrders();
+    setOrders(fetchedAssets);
+  };
+
+  React.useEffect(() => {
+    loadOrders();
+  }, []);
 
   const showNoOrders = error || orders.length === 0;
 
@@ -149,18 +161,22 @@ const Orders: React.FC = () => {
                       <thead className="table-dark">
                         <tr>
                           <th>TYPE</th>
-                          <th>ORDER</th>
-                          <th>COMMODITY</th>
+                          <th>ASSET</th>
                           <th>QUANTITY</th>
+                          <th>PRICE</th>
+                          <th>STATUS</th>
+                          <th>DATE</th>
                         </tr>
                       </thead>
                       <tbody>
                         {orders.map((order) => (
                           <tr>
-                            <td>{order.type}</td>
-                            <td>{order.order}</td>
-                            <td>{order.commodity}</td>
+                            <td>{order.order_type}</td>
+                            <td>{order.asset}</td>
                             <td>{order.quantity}</td>
+                            <td>{order.price}</td>
+                            <td>{order.order_status}</td>
+                            <td>{formatDateTime(order.created_at)}</td>
                           </tr>
                         ))}
                       </tbody>
