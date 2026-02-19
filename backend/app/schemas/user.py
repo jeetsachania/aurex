@@ -1,8 +1,9 @@
 from pydantic import BaseModel, constr, EmailStr
 
-class UserCreate(BaseModel):
+
+class UserRegister(BaseModel):
     """
-    UserCreate Schema.
+    UserRegister Schema.
 
     Attributes:
         firstname (`str`): User's firstname.
@@ -23,6 +24,7 @@ class UserCreate(BaseModel):
         """
         orm_mode = True
 
+
 class UserResponse(BaseModel):
     """
     UserResponse Schema.
@@ -39,6 +41,27 @@ class UserResponse(BaseModel):
     lastname: str
     email: EmailStr
     username: str
+
+    class Config:
+        """
+        Parse the SQLAlchemy ORM model into a Pydantic model.
+        """
+        orm_mode = True
+
+
+class UserLogin(BaseModel):
+    username: str
+    password: str
+
+    class Config:
+        """
+        Parse the SQLAlchemy ORM model into a Pydantic model.
+        """
+        orm_mode = True
+
+
+class UserEmail(BaseModel):
+    email: str
 
     class Config:
         """

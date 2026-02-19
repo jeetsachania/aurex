@@ -10,11 +10,6 @@ class AssetType(str, Enum):
     STOCK = "STOCK"
 
 
-class AssetStatus(str, Enum):
-    ACTIVE = "ACTIVE"
-    INACTIVE = "INACTIVE"
-
-
 class AssetCreate(BaseModel):
     """
     AssetCreate Schema
@@ -54,7 +49,7 @@ class AssetResponse(BaseModel):
     asset_type: AssetType
     exchange: str
     currency: str
-    active: AssetStatus
+    active: bool
     created_at: datetime
     updated_at: datetime
 

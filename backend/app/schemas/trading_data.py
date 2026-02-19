@@ -1,18 +1,6 @@
 from datetime import datetime
-
-from enum import Enum
-from datetime import datetime
+from decimal import Decimal
 from pydantic import BaseModel
-
-
-class AssetType(str, Enum):
-    COMMODITY = "COMMODITY"
-    STOCK = "STOCK"
-
-
-class AssetStatus(str, Enum):
-    ACTIVE = "ACTIVE"
-    INACTIVE = "INACTIVE"
 
 
 class TradingDataCreate(BaseModel):
@@ -21,16 +9,18 @@ class TradingDataCreate(BaseModel):
 
     Attributes:
         symbol (`str`): Asset symbol
-        name (`str`): Asset name
-        asset_type (`str`): Type of asset
-        exchange (`str`): Exchange
-        currency (`str`): Trading currency
+        open_price (`Decimal`): Open price
+        close_price (`Decimal`): Close price
+        high_price (`Decimal`): Highest price
+        low_price (`Decimal`): Lowest price
+        volume (`Decimal`): Trading volume
     """
     symbol: str
-    name: str
-    asset_type: str
-    exchange: str
-    currency: str
+    open_price: Decimal
+    close_price: Decimal
+    high_price: Decimal
+    low_price: Decimal
+    volume: Decimal
 
 
 class TradingDataResponse(BaseModel):
@@ -52,11 +42,11 @@ class TradingDataResponse(BaseModel):
     id: int
     asset_id: int
     trading_date: datetime
-    open_price: int
-    close_price: int
-    high_price: int
-    low_price: int
-    volume: int
+    open_price: Decimal
+    close_price: Decimal
+    high_price: Decimal
+    low_price: Decimal
+    volume: Decimal
     created_at: datetime
     updated_at: datetime
 
