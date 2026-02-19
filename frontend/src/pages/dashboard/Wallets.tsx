@@ -10,6 +10,7 @@ import TransactionModal from "../../components/dashboard/TransactionModal";
 interface WalletCardProps {
   currency: string;
   balance: string;
+  onTransactionComplete: () => void;
 }
 
 type Currency = {
@@ -76,7 +77,7 @@ const AddWallet: React.FC<{ onWalletAdded: () => void }> = ({
   );
 };
 
-function WalletCard({ currency, balance }: WalletCardProps) {
+function WalletCard({ currency, balance, onTransactionComplete }: WalletCardProps) {
   const [modalOpen, setModalOpen] = React.useState(false);
   const [type, setType] = React.useState<"deposit" | "withdraw">("deposit");
 
@@ -90,6 +91,7 @@ function WalletCard({ currency, balance }: WalletCardProps) {
         toastError("Failed");
       } else {
         toastSuccess("Success");
+        onTransactionComplete();
       }
     } catch (err) {
       toastError("Error");
@@ -179,6 +181,7 @@ const Wallets: React.FC = () => {
               key={wallet.currency}
               currency={wallet.currency}
               balance={wallet.balance}
+              onTransactionComplete={loadWallets}
             />
           ))
         )}
