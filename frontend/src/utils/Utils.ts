@@ -28,3 +28,11 @@ export const validateNumericInput = (value: string) => {
 
   return value;
 };
+
+export const formatDateTime = (date: Date) => {
+  const _date = new Date(date);
+  const formattedDate = _date.toLocaleDateString("en-GB");
+  const formattedTime = _date.toLocaleTimeString("en-GB", { hour12: false });
+
+  return `${formattedDate} ${formattedTime}`;
+};
