@@ -73,6 +73,13 @@ const Signup: React.FC = () => {
           password,
         }
       );
+      if (response.status == 200) {
+        // Email address already registered
+        toastSuccess(response.data.detail);
+        setTimeout(() => {
+          navigate("/login");
+        }, 3500);
+      }
       if (response.status == 201) {
         toastSuccess("Registration Successfull");
         setTimeout(() => {
@@ -86,6 +93,9 @@ const Signup: React.FC = () => {
           error.response?.data?.detail || "An unexpected error occurred";
 
         switch (status) {
+          case 200:
+            toastError(error.response?.data?.detail);
+            break;
           case 400:
             toastError("Invalid request");
             break;
