@@ -1,0 +1,58 @@
+[
+  {
+    "symbol": "HSBA",
+    "name": "HSBC Holdings plc",
+    "asset_type": "STOCK",
+    "exchange": "LSE",
+    "currency": "GBP"
+  },
+  {
+    "symbol": "BP",
+    "name": "BP plc",
+    "asset_type": "STOCK",
+    "exchange": "LSE",
+    "currency": "GBP"
+  },
+  {
+    "symbol": "AAPL",
+    "name": "Apple Inc.",
+    "asset_type": "STOCK",
+    "exchange": "NASDAQ",
+    "currency": "USD"
+  },
+  {
+    "symbol": "MSFT",
+    "name": "Microsoft Corporation",
+    "asset_type": "STOCK",
+    "exchange": "NASDAQ",
+    "currency": "USD"
+  },
+  {
+    "symbol": "AIR.PA",
+    "name": "Airbus SE",
+    "asset_type": "STOCK",
+    "exchange": "Euronext Paris",
+    "currency": "EUR"
+  },
+  {
+    "symbol": "SAP.DE",
+    "name": "SAP SE",
+    "asset_type": "STOCK",
+    "exchange": "XETRA",
+    "currency": "EUR"
+  },
+  {
+    "symbol": "7203.T",
+    "name": "Toyota Motor Corporation",
+    "asset_type": "STOCK",
+    "exchange": "Tokyo Stock Exchange",
+    "currency": "JPY"
+  },
+  {
+    "symbol": "6758.T",
+    "name": "Sony Group Corporation",
+    "asset_type": "STOCK",
+    "exchange": "Tokyo Stock Exchange",
+    "currency": "JPY"
+  }
+]
