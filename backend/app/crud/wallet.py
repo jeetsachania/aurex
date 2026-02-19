@@ -6,86 +6,16 @@ from sqlalchemy.orm import Session
 from app.models.wallet import Wallet
 
 
-def get(db: Session, user_id: int, currency: str) -> Wallet:
-    """
-    Get the wallet for the given currency and user ID.
-
-    Queries the database for the wallet, raising an exception if the wallet
-    does not exist, returning the wallet otherwise.
-
-    Args:
-        db (`Session`): SQLAlchemy database session.
-        user_id (`int`): The user's ID.
-        currency (`str`): The currency of the wallet.
-
-    Returns:
-        wallet (`Wallet`): The Wallet object.
-
-    Raises:
-        `HTTPException`:
-            - `404`: If the wallet does not exist.
-    """
-    wallet = db.query(Wallet).filter(
-        Wallet.user_id == user_id,
-        Wallet.currency == currency
-    ).first()
-
-    if not wallet:
-        raise HTTPException(404, f"Wallet '{wallet}' does not exist")
-
-    return wallet
-
-
-def get_all(db: Session, user_id: int) -> list:
-    """
-    Fetches all wallets for the given user.
-
-    Args:
-        db (`Session`): SQLAlchemy database session.
-        user_id (`int`): The user's ID.
-
-    Returns:
-        `sqlalchemy.sql.expression.ColumnElement`: All wallets for the given user.
-    """
-    return (
-        db.query(Wallet)
-        .filter(Wallet.user_id == user_id)
-        .order_by(Wallet.currency)
-        .all()
-    )
-
-
-def exists(db: Session, user_id: int, currency: str) -> bool:
-    """
-    Check if a wallet with the given currency exists for the given user.
-
-    Queries the database for the wallet, returning True if the wallet
-    exists, and False otherwise.
-
-    Args:
-        db (`Session`): SQLAlchemy database session.
-        user_id (`int`): The user's ID.
-        currency (`str`): The currency of the wallet.
-
-    Returns:
-        `bool`: True if the wallet exists, False otherwise.
-    """
-    return db.query(Wallet).filter(
-        Wallet.user_id == user_id,
-        Wallet.currency == currency
-    ).first() is not None
-
-
 def validate_deposit(amount: Decimal):
     """
-    Validate a deposit.
+    Validate a deposit
 
     Args:
-        amount (`Decimal`): The amount to deposit.
+        amount (`Decimal`): The amount to deposit
 
     Raises:
         `HTTPException`:
-            - `400`: If the amount is zero or negative.
+            - `400`: If the amount is zero or negative
     """
     if amount <= 0:
         raise HTTPException(400, "Amount must be positive")
@@ -96,14 +26,14 @@ def validate_withdrawal(wallet: Wallet, amount: Decimal):
     Validate a withdrawal.
 
     Args:
-        wallet (`Wallet`): The Wallet object.
-        amount (`Decimal`): The amount to deposit.
+        wallet (`Wallet`): The Wallet object
+        amount (`Decimal`): The amount to deposit
 
     Raises:
         `HTTPException`:
-            - `400`: If the amount is zero or negative.
-            - `400`: If the wallet balance is zero.
-            - `400`: If the amount is greater than the wallet balance.
+            - `400`: If the amount is zero or negative
+            - `400`: If the wallet balance is zero
+            - `400`: If the amount is greater than the wallet balance
     """
     if amount <= 0:
         raise HTTPException(400, "Amount must be positive")
@@ -115,14 +45,14 @@ def validate_withdrawal(wallet: Wallet, amount: Decimal):
 
 def validate_delete(wallet: Wallet):
     """
-    Validate deleting a wallet.
+    Validate deleting a wallet
 
     Args:
-        wallet (`Wallet`): The Wallet object.
+        wallet (`Wallet`): The Wallet object
 
     Raises:
         `HTTPException`:
-            - `400`: If the amount is greater than zero.
+            - `400`: If the amount is greater than zero
     """
     if wallet.balance > 0:
         raise HTTPException(400, "Wallet has positive balance")
