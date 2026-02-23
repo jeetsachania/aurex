@@ -2,9 +2,13 @@ import React from "react";
 
 import BaseModal from "./BaseModal";
 
-type Commodity = {
-  commodity: string;
-  price: number;
+type Asset = {
+  symbol: string;
+  name: string;
+  asset_type: string;
+  exchange: string;
+  currency: string;
+  active: boolean;
 };
 
 type NewOrder = {
@@ -16,7 +20,7 @@ type NewOrder = {
 
 interface AddOrderProps {
   isOpen: boolean;
-  commodities: Commodity[];
+  commodities: Asset[];
   onClose: () => void;
   onConfirm: (order: NewOrder) => void;
 }
@@ -37,7 +41,7 @@ const AddOrderModal: React.FC<AddOrderProps> = ({
 
   React.useEffect(() => {
     if (commodities.length > 0) {
-      setSelectedCommodity(commodities[0].commodity);
+      setSelectedCommodity(commodities[0].symbol);
     }
   }, [commodities]);
 
@@ -71,7 +75,7 @@ const AddOrderModal: React.FC<AddOrderProps> = ({
     setError(null);
 
     if (commodities.length > 0) {
-      setSelectedCommodity(commodities[0].commodity);
+      setSelectedCommodity(commodities[0].symbol);
     } else {
       setSelectedCommodity("");
     }
@@ -100,8 +104,8 @@ const AddOrderModal: React.FC<AddOrderProps> = ({
           <option value="empty">No commodities available</option>
         ) : (
           commodities.map((c) => (
-            <option key={c.commodity} value={c.commodity}>
-              {c.commodity}
+            <option key={c.symbol} value={c.symbol}>
+              {c.symbol}
             </option>
           ))
         )}
@@ -127,30 +131,26 @@ const AddOrderModal: React.FC<AddOrderProps> = ({
           <span className="fw-semibold">VOLUME</span>
           <span className="fw-semibold text-end">$125.40</span>
         </li>
-        <li className="list-group-item d-flex justify-content-between">
-          <span className="fw-semibold">PRICE</span>
-          <span className="fw-semibold text-end">$125.40</span>
-        </li>
       </ul>
       <div className="custom-radio justify-content-between mt-3">
-      {orderTypes.map((type) => (
-        <label
-          key={type}
-          className={`rounded-pill button radio ${
-            selectedOrderType === type ? "active" : ""
-          }`}
-        >
-          <input
-            type="radio"
-            name="orderType"
-            value={type}
-            checked={selectedOrderType === type}
-            onChange={() => setSelectedOrderType(type)}
-          />
-          {type}
-        </label>
-      ))}
-    </div>
+        {orderTypes.map((type) => (
+          <label
+            key={type}
+            className={`rounded-pill button radio ${
+              selectedOrderType === type ? "active" : ""
+            }`}
+          >
+            <input
+              type="radio"
+              name="orderType"
+              value={type}
+              checked={selectedOrderType === type}
+              onChange={() => setSelectedOrderType(type)}
+            />
+            {type}
+          </label>
+        ))}
+      </div>
       <h3 className="card-text mt-3">QUANTITY</h3>
       <input
         type="text"
