@@ -128,14 +128,6 @@ async def refresh_token(payload: RefreshTokenRequest, db: Session = Depends(get_
     if not exists(db, User, username=username):
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="User not found")
 
-    # db_user = db.query(User).filter(User.username == username).first()
-
-    # if not db_user:
-    #     raise HTTPException(
-    #         status_code=status.HTTP_404_NOT_FOUND,
-    #         detail="User not found",
-    #     )
-
     db_user = get(db, User, username=username)
 
     new_access_token = create_token(data={"username": db_user.username}, expiry_minutes=ACCESS_TOKEN_EXPIRE_MINUTES)

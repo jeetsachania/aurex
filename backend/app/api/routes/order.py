@@ -17,7 +17,7 @@ router = APIRouter()
 @router.post("/", response_model=OrderResponse, status_code=status.HTTP_200_OK)
 def create(order: OrderCreate, user: User = Depends(get_current_user), db: Session = Depends(get_db)):
     """
-    Add a new order to the database.
+    Add a new order to the database
 
     Args:
         order (`OrderCreate`): Order payload in the OrderCreate schema
@@ -43,7 +43,7 @@ def create(order: OrderCreate, user: User = Depends(get_current_user), db: Sessi
 @router.get("/", response_model=List[OrderResponse], status_code=status.HTTP_200_OK)
 def get(user: User = Depends(get_current_user), db: Session = Depends(get_db)):
     """
-    Get all orders.
+    Get all orders
 
     Args:
         user (`User`): The current user
@@ -52,4 +52,4 @@ def get(user: User = Depends(get_current_user), db: Session = Depends(get_db)):
     Returns:
         orders (`list[Order]`): List of all Order objects
     """
-    return get_all(db, Order)
+    return get_all(db, Order, message="No orders found")

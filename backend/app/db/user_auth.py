@@ -4,7 +4,9 @@ from passlib.context import CryptContext
 
 from app.models.user import User
 
+
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
+
 
 def authenticate_user(db: Session, username: str, password: str) -> User:
     """
