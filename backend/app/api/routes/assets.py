@@ -3,7 +3,7 @@ from typing import List
 from fastapi import APIRouter, Depends, status
 from sqlalchemy.orm import Session
 
-from app.api.deps import get_current_user
+from app.api.deps import get_current_user, role_required
 from app.crud.utils import commit, get_all
 from app.db.database import get_db
 from app.models.user import User
@@ -15,7 +15,7 @@ router = APIRouter()
 
 
 @router.post("/", response_model=AssetResponse, status_code=status.HTTP_200_OK)
-def create(asset: AssetCreate, user: User = Depends(get_current_user), db: Session = Depends(get_db)):
+def create(asset: AssetCreate, user: User = Depends(role_required("Admin")), db: Session = Depends(get_db)):
     """
     Add a new asset to the database
 

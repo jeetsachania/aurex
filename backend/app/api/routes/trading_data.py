@@ -3,7 +3,7 @@ from typing import List
 from fastapi import APIRouter, HTTPException, Depends, status
 from sqlalchemy.orm import Session
 
-from app.api.deps import get_current_user
+from app.api.deps import get_current_user, role_required
 from app.crud.utils import commit, exists, get, get_all
 from app.db.database import get_db
 from app.models.user import User
@@ -16,7 +16,7 @@ router = APIRouter()
 
 
 @router.post("/", status_code=status.HTTP_200_OK)
-def create(data: TradingDataCreate, user: User = Depends(get_current_user), db: Session = Depends(get_db)):
+def create(data: TradingDataCreate, user: User = Depends(role_required("Admin")), db: Session = Depends(get_db)):
     """
     Add trading data to the database
 

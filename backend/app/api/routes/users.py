@@ -5,6 +5,7 @@ from sqlalchemy.orm import Session
 
 from app.api.deps import get_current_user
 from app.crud.utils import commit, exists, get
+from app.crud.user import assign_role
 from app.db.database import get_db
 from app.db.user_auth import authenticate_user
 from app.models.user import User
@@ -29,7 +30,8 @@ async def register_user(user: UserRegister, db: Session = Depends(get_db)) -> Us
     """
     Register a user
 
-    Validates that the email address and username provided are unique.
+    Validates that the email address and username provided are unique
+
     If so, the password is hashed and the user is stored in the database,
     returning the created users information
 
@@ -65,6 +67,8 @@ async def register_user(user: UserRegister, db: Session = Depends(get_db)) -> Us
         hashed_password=pwd_context.hash(user.password)
     )
 
+    assign_role(db, new_user, "User")
+
     return commit(db, new_user)
 
 
@@ -99,8 +103,7 @@ async def login_user(user: UserLogin, db: Session = Depends(get_db)) -> dict:
 
 @router.post("/exists")
 async def user_exists(user: UserEmail, db: Session = Depends(get_db)):
-    db_user = db.query(User).filter(User.email == user.email).first()
-    return True if db_user != None else False
+    return exists(db, User, email=user.email)
 
 
 @router.post("/refresh_token")
