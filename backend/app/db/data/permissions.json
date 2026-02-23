@@ -1,0 +1,18 @@
+[
+  {
+    "id": 1,
+    "name": "create_user"
+  },
+  {
+    "id": 2,
+    "name": "read_user"
+  },
+  {
+    "id": 3,
+    "name": "update_user"
+  },
+  {
+    "id": 4,
+    "name": "delete_user"
+  }
+]
