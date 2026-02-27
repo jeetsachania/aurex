@@ -1,6 +1,6 @@
 from typing import List
 
-from fastapi import APIRouter, Depends, status
+from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy.orm import Session
 
 from app.api.deps import get_current_user, role_required
@@ -52,6 +52,14 @@ def get(user: User = Depends(get_current_user), db: Session = Depends(get_db)):
             - `404`: If no assets exists
 
     Returns:
-        `list[Asset]`: List of all Asset objects
+        assets (`list[Asset]`): List of all Asset objects
     """
-    return get_all(db, Asset, message="No assets found")
+    assets = get_all(db, Asset)
+
+    if not assets:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail="No assets found"
+        )
+
+    return assets

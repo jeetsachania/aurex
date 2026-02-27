@@ -14,7 +14,7 @@ def assign_role(db: Session, user: User, role: str):
         user (`User`): User object
         role (`str`): Role
     """
-    _role = get(db, Role, message="Role not found", name=role)
+    _role = get(db, Role, name=role)
     if _role:
         user.roles.append(_role)
         db.commit()

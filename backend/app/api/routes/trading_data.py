@@ -28,7 +28,7 @@ def create(data: TradingDataCreate, user: User = Depends(role_required("Admin"))
     Returns:
         `TradingData`: The TradingData object
     """
-    asset_id = get(db, Asset, message=f"Asset '{data.symbol}' not found", symbol=data.symbol)
+    asset_id = get(db, Asset, symbol=data.symbol)
     trading_data = TradingData(
         asset_id=asset_id.id,
         open_price=data.open_price,
@@ -57,7 +57,7 @@ def get_all(user: User = Depends(get_current_user), db: Session = Depends(get_db
     Returns:
         orders (`list[TradingData]`): List of all TradingData objects
     """
-    return get_all(db, TradingData, message="No trading data found")
+    return get_all(db, TradingData)
 
 
 @router.get("/{symbol}", status_code=status.HTTP_200_OK)
@@ -84,7 +84,7 @@ def get_by_symbol(symbol: str, user: User = Depends(get_current_user), db: Sessi
             detail=f"Asset '{symbol}' not found"
         )
 
-    asset = get(db, Asset, message=f"Asset '{symbol}' not found", symbol=symbol)
+    asset = get(db, Asset, symbol=symbol)
 
     trading_data = (
         db.query(TradingData)

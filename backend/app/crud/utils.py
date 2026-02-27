@@ -1,6 +1,7 @@
 from typing import Any
 
 from fastapi import HTTPException
+from sqlalchemy import select
 from sqlalchemy.exc import IntegrityError
 from sqlalchemy.orm import Session
 
@@ -45,10 +46,16 @@ def exists(db: Session, cls: Any, **kwargs) -> bool:
     Returns:
         `bool`: True if the instance exists, False otherwise
     """
-    return db.query(cls.id).filter_by(**kwargs).first() is not None
+    result = db.execute(
+        select(cls.id).filter_by(**kwargs)
+    )
+
+    obj = result.scalar_one_or_none()
+
+    return obj is not None
 
 
-def get(db: Session, cls: Any, message, **kwargs) -> Any:
+def get(db: Session, cls: Any, **kwargs) -> Any:
     """
     Fetch an SQLAlchemy instance of type `cls`
 
@@ -60,12 +67,38 @@ def get(db: Session, cls: Any, message, **kwargs) -> Any:
     Returns:
         obj (`Any`): SQLAlchemy instance
     """
-    obj = db.query(cls).filter_by(**kwargs).one_or_none()
+    result = db.execute(
+        select(cls).filter_by(**kwargs)
+    )
+
+    obj = result.scalar_one_or_none()
 
     return obj
 
 
-def get_all(db: Session, cls: Any, message, **kwargs) -> Any:
+def get_and_lock(db: Session, cls: Any, **kwargs) -> Any:
+    """
+    Fetch an SQLAlchemy instance of type `cls` and lock the row
+
+    Args:
+        db (`Session`): SQLAlchemy database session
+        cls (`Any`): SQLAlchemy declarative model class
+        **kwargs: Optional fields to filter query
+
+    Returns:
+        obj (`Any`): SQLAlchemy instance
+    """
+    result = db.execute(
+        select(cls).filter_by(**kwargs)
+        .with_for_update()
+    )
+
+    obj = result.scalar_one_or_none()
+
+    return obj
+
+
+def get_all(db: Session, cls: Any, **kwargs) -> Any:
     """
     Fetch all SQLAlchemy instances of type `cls`
 
@@ -77,6 +110,7 @@ def get_all(db: Session, cls: Any, message, **kwargs) -> Any:
     Returns:
         objects (`Any`): SQLAlchemy instances
     """
-    objects = db.query(cls).filter_by(**kwargs).all()
+    statement = select(cls).filter_by(**kwargs)
+    result = db.execute(statement)
 
-    return objects
+    return result.scalars().all()

@@ -65,7 +65,7 @@ def get_all_currencies(user: User = Depends(get_current_user), db: Session = Dep
     Returns:
         `list[Currency]`: List of all Currency objects
     """
-    return get_all(db, Currency, message="No currencies found")
+    return get_all(db, Currency)
 
 
 @router.get("/available", response_model=List[CurrencyResponse], status_code=status.HTTP_200_OK)
@@ -86,7 +86,7 @@ def get_available(user: User = Depends(get_current_user), db: Session = Depends(
 @router.delete("/{code}", status_code=status.HTTP_204_NO_CONTENT)
 def delete(code: str, db: Session = Depends(get_db)):
     # ADMIN ONLY
-    currency = get(db, Currency, message=f"Currency '{code}' not found", code=code.upper())
+    currency = get(db, Currency, code=code.upper())
     db.delete(currency)
     db.commit()
     return
@@ -107,6 +107,14 @@ def get_currency(code: str, user: User = Depends(get_current_user), db: Session 
             - `404`: If the currency does not exist
 
     Returns:
-        `Currency`: The Currency object
+        currency (`Currency`): Currency object
     """
-    return get(db, Currency, message=f"Currency '{code}' not found", code=code.upper())
+    currency = get(db, Currency, code=code.upper())
+    
+    if not currency:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail=f"Currency '{code}' does not exist"
+        )
+
+    return currency

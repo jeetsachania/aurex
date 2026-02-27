@@ -69,7 +69,7 @@ def get_wallets(user: User = Depends(get_current_user), db: Session = Depends(ge
     Returns:
         `list[Wallet]`: List of all Wallet objects
     """
-    return get_all(db, Wallet, message=f"No wallets found", user_id=user.id)
+    return get_all(db, Wallet, user_id=user.id)
 
 
 @router.delete("/{currency}", status_code=status.HTTP_204_NO_CONTENT)
@@ -96,7 +96,7 @@ def delete(currency: str, user: User = Depends(get_current_user), db: Session = 
             - `400`: If the database operation fails
             - `404`: If the wallet does not exist
     """
-    wallet = get(db, Wallet, message=f"Wallet '{currency}' not found", user_id=user.id, currency=currency)
+    wallet = get(db, Wallet, user_id=user.id, currency=currency)
     validate_delete(wallet)
     db.delete(wallet)
     db.commit()
@@ -126,7 +126,7 @@ def deposit(currency: str, amount: Decimal = Body(..., embed=True), user: User =
             - `400`: If the database operation fails
             - `404`: If the wallet does not exist
     """
-    wallet = get(db, Wallet, message=f"Wallet '{currency}' not found", user_id=user.id, currency=currency)
+    wallet = get(db, Wallet, user_id=user.id, currency=currency)
     validate_deposit(amount)
     wallet.balance += amount
     return commit(db, wallet)
@@ -157,7 +157,7 @@ def withdraw(currency: str, amount: Decimal = Body(..., embed=True), user: User 
             - `400`: If the database operation fails
             - `404`: If the wallet does not exist
     """
-    wallet = get(db, Wallet, message=f"Wallet '{currency}' not found", user_id=user.id, currency=currency)
+    wallet = get(db, Wallet, user_id=user.id, currency=currency)
     validate_withdrawal(wallet, amount)
     wallet.balance -= amount
     return commit(db, wallet)
