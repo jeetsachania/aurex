@@ -70,12 +70,11 @@ const AddOrder: React.FC<{ onOrderAdded: () => void }> = ({ onOrderAdded }) => {
       price: modalOrder.price || 100,
     };
 
-    console.log("Payload to send:", payload);
-
     try {
       const res = await postWithAuth("http://localhost:8000/orders", payload);
       if (!res.ok) {
-        toastError("Failed to add order");
+        const errorData = await res.json();
+        toastError(errorData.detail);
         return;
       }
       toastSuccess("Order added");
@@ -90,7 +89,7 @@ const AddOrder: React.FC<{ onOrderAdded: () => void }> = ({ onOrderAdded }) => {
   return (
     <>
       <button
-        className="wallet-button"
+        className="wallet-button mb-3"
         id="add"
         aria-label="Add"
         onClick={() => setOpen(true)}

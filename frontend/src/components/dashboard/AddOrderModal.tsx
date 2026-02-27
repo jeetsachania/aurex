@@ -55,7 +55,7 @@ const AddOrderModal: React.FC<AddOrderProps> = ({
       parsedQuantity <= 0 ||
       parsedPrice <= 0
     ) {
-      setError("Quantity/Price Invalid");
+      setError("Invalid Quantity / Price");
       return;
     }
 
