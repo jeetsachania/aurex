@@ -6,7 +6,6 @@ import { formatDateTime } from "../../utils/Utils";
 
 import { toastSuccess, toastError } from "../../components/ToastNotification";
 import AddOrderModal from "../../components/dashboard/AddOrderModal";
-import TransactionModal from "../../components/dashboard/TransactionModal";
 
 type Order = {
   asset_type: string;
@@ -56,18 +55,17 @@ const AddOrder: React.FC<{ onOrderAdded: () => void }> = ({ onOrderAdded }) => {
     loadCommodities();
   }, []);
 
-  const handleAddOrder = async (modalOrder: {
-    type: string;
-    order: string;
+  const handleAddOrder = async (order: {
     commodity: string;
-    quantity: string;
-    price?: number;
+    type: string;
+    quantity: number;
+    price: number;
   }) => {
     const payload = {
       asset_type: "STOCK",
-      asset: modalOrder.commodity,
-      quantity: parseInt(modalOrder.quantity),
-      price: modalOrder.price || 100,
+      asset: order.commodity,
+      quantity: order.quantity,
+      price: order.price || 100,
     };
 
     try {
@@ -109,7 +107,6 @@ const AddOrder: React.FC<{ onOrderAdded: () => void }> = ({ onOrderAdded }) => {
 
 const Orders: React.FC = () => {
   const [orders, setOrders] = React.useState<Order[]>([]);
-  const [error, setError] = React.useState(false);
   
   const fetchOrders = async () => {
     try {
@@ -137,7 +134,7 @@ const Orders: React.FC = () => {
     loadOrders();
   }, []);
 
-  const showNoOrders = error || orders.length === 0;
+  const showNoOrders = orders.length === 0;
 
   return (
     <div>
