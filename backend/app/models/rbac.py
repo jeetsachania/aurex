@@ -6,7 +6,7 @@ from sqlalchemy import (
 )
 from sqlalchemy.orm import relationship
 
-from app.db.database import Base
+from backend.app.db.database import Base
 
 
 class Role(Base):

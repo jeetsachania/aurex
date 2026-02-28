@@ -5,14 +5,14 @@ from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy import select
 from sqlalchemy.orm import Session
 
-from app.api.deps import get_current_user
-from app.crud.utils import commit, get, get_and_lock, get_all
-from app.db.database import get_db
-from app.models.asset import Asset
-from app.models.user import User
-from app.models.order import Order
-from app.models.wallet import Wallet
-from app.schemas.order import OrderCreate, OrderResponse
+from backend.app.api.deps import get_current_user
+from backend.app.crud.utils import commit, get, get_and_lock, get_all
+from backend.app.db.database import get_db
+from backend.app.models.asset import Asset
+from backend.app.models.user import User
+from backend.app.models.order import Order
+from backend.app.models.wallet import Wallet
+from backend.app.schemas.order import OrderCreate, OrderResponse
 
 
 router = APIRouter()

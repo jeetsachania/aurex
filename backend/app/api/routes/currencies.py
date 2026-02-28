@@ -3,13 +3,13 @@ from typing import List
 from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy.orm import Session
 
-from app.api.deps import get_current_user
-from app.crud.currency import get_additional_currencies
-from app.crud.utils import commit, exists, get, get_all
-from app.db.database import get_db
-from app.models.user import User
-from app.models.currency import Currency
-from app.schemas.currency import CurrencyCreate, CurrencyResponse
+from backend.app.api.deps import get_current_user
+from backend.app.crud.currency import get_additional_currencies
+from backend.app.crud.utils import commit, exists, get, get_all
+from backend.app.db.database import get_db
+from backend.app.models.user import User
+from backend.app.models.currency import Currency
+from backend.app.schemas.currency import CurrencyCreate, CurrencyResponse
 
 
 router = APIRouter()

@@ -1,8 +1,8 @@
 from sqlalchemy.orm import Session
 
-from app.crud.utils import get
-from app.models.rbac import Role
-from app.models.user import User
+from backend.app.crud.utils import get
+from backend.app.models.rbac import Role
+from backend.app.models.user import User
 
 
 def assign_role(db: Session, user: User, role: str):
