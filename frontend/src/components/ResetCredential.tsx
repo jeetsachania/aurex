@@ -1,10 +1,11 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import { ToastContainer } from "react-toastify";
 
+import { apiBaseUrl } from "../config/apiConfig";
 import Logo from "../assets/svgs/Logo";
 import { validateEmail } from "../utils/Utils";
+import { ToastContainer } from "react-toastify";
 import { toastSuccess, toastError } from "../components/ToastNotification";
 
 interface ResetCredentialProps {
@@ -35,7 +36,7 @@ const ResetCredential: React.FC<ResetCredentialProps> = ({
     }
 
     try {
-      const response = await axios.post(apiUrl, { "email": email });
+      const response = await axios.post(`${apiBaseUrl}/${apiUrl}`, { "email": email });
       toastSuccess("Reset request initiated");
       if (response.data == false) {
         // No account found with supplied email address

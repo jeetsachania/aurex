@@ -6,7 +6,7 @@ const ResetUsername: React.FC = () => {
     <ResetCredential
       action="username"
       label="Reset Username"
-      apiUrl="http://localhost:8000/users/exists"
+      apiUrl="api/users/exists"
     />
   );
 };

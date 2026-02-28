@@ -5,7 +5,7 @@ from typing import Optional
 from fastapi import status, Request, HTTPException
 from jose import jwt, JWTError
 
-from config import settings
+from backend.config import settings
 
 SECRET_KEY = settings.SECRET_KEY
 ALGORITHM = settings.ALGORITHM

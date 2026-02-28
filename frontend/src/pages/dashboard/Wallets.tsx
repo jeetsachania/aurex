@@ -1,5 +1,6 @@
 import React from "react";
 
+import { apiBaseUrl } from "../../config/apiConfig";
 import { fetchWithAuth } from "../../api/authFetch";
 import { postWithAuth } from "../../api/authFetch";
 
@@ -31,7 +32,7 @@ const AddWallet: React.FC<{ onWalletAdded: () => void }> = ({
   React.useEffect(() => {
     if (!open) return;
 
-    fetchWithAuth("http://localhost:8000/currencies/available")
+    fetchWithAuth(`${apiBaseUrl}/api/currencies/available`)
       .then((res) => res.json())
       .then((data) => setCurrencies(data))
       .catch(() => toastError("Failed to load currencies"));
@@ -39,7 +40,7 @@ const AddWallet: React.FC<{ onWalletAdded: () => void }> = ({
 
   const handleAddWallet = async (currency: string) => {
     try {
-      const res = await postWithAuth("http://localhost:8000/wallets", {
+      const res = await postWithAuth(`${apiBaseUrl}/api/wallets`, {
         currency,
       });
 
@@ -84,7 +85,7 @@ function WalletCard({ currency, balance, onTransactionComplete }: WalletCardProp
   const handleConfirm = async (amount: number) => {
     try {
       const response = await postWithAuth(
-        `http://localhost:8000/wallets/${currency}/${type}`,
+        `${apiBaseUrl}/api/wallets/${currency}/${type}`,
         { amount },
       );
       if (!response.ok) {
@@ -151,7 +152,7 @@ const Wallets: React.FC = () => {
   const [error, setError] = React.useState(false);
 
   const loadWallets = () => {
-    fetchWithAuth("http://localhost:8000/wallets/list")
+    fetchWithAuth(`${apiBaseUrl}/api/wallets/list`)
       .then((res) => {
         if (!res.ok) throw new Error();
         return res.json();

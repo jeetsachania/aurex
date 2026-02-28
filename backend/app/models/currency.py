@@ -1,7 +1,7 @@
 from sqlalchemy import Boolean, Column, Integer, String
 from sqlalchemy import CheckConstraint
 
-from app.db.database import Base
+from backend.app.db.database import Base
 
 
 class Currency(Base):

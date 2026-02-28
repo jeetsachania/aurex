@@ -2,7 +2,7 @@ from decimal import Decimal
 
 from fastapi import HTTPException
 
-from app.models.wallet import Wallet
+from backend.app.models.wallet import Wallet
 
 
 def validate_deposit(amount: Decimal):

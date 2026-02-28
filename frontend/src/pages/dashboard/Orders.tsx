@@ -1,12 +1,12 @@
 import React from "react";
 
+import { apiBaseUrl } from "../../config/apiConfig";
 import { fetchWithAuth } from "../../api/authFetch";
 import { postWithAuth } from "../../api/authFetch";
 import { formatDateTime } from "../../utils/Utils";
 
 import { toastSuccess, toastError } from "../../components/ToastNotification";
 import AddOrderModal from "../../components/dashboard/AddOrderModal";
-import TransactionModal from "../../components/dashboard/TransactionModal";
 
 type Order = {
   asset_type: string;
@@ -34,7 +34,7 @@ const AddOrder: React.FC<{ onOrderAdded: () => void }> = ({ onOrderAdded }) => {
 
   const fetchAssets = async () => {
     try {
-      const res = await fetchWithAuth("http://localhost:8000/assets");
+      const res = await fetchWithAuth(`${apiBaseUrl}/api/assets`);
       if (!res.ok) {
         toastError("Failed to fetch assets");
         return;
@@ -56,22 +56,21 @@ const AddOrder: React.FC<{ onOrderAdded: () => void }> = ({ onOrderAdded }) => {
     loadCommodities();
   }, []);
 
-  const handleAddOrder = async (modalOrder: {
-    type: string;
-    order: string;
+  const handleAddOrder = async (order: {
     commodity: string;
-    quantity: string;
-    price?: number;
+    type: string;
+    quantity: number;
+    price: number;
   }) => {
     const payload = {
       asset_type: "STOCK",
-      asset: modalOrder.commodity,
-      quantity: parseInt(modalOrder.quantity),
-      price: modalOrder.price || 100,
+      asset: order.commodity,
+      quantity: order.quantity,
+      price: order.price || 100,
     };
 
     try {
-      const res = await postWithAuth("http://localhost:8000/orders", payload);
+      const res = await postWithAuth(`${apiBaseUrl}/api/orders`, payload);
       if (!res.ok) {
         const errorData = await res.json();
         toastError(errorData.detail);
@@ -109,11 +108,10 @@ const AddOrder: React.FC<{ onOrderAdded: () => void }> = ({ onOrderAdded }) => {
 
 const Orders: React.FC = () => {
   const [orders, setOrders] = React.useState<Order[]>([]);
-  const [error, setError] = React.useState(false);
   
   const fetchOrders = async () => {
     try {
-      const res = await fetchWithAuth("http://localhost:8000/orders");
+      const res = await fetchWithAuth(`${apiBaseUrl}/api/orders`);
 
       if (!res.ok) {
         toastError("Failed to fetch orders");
@@ -137,7 +135,7 @@ const Orders: React.FC = () => {
     loadOrders();
   }, []);
 
-  const showNoOrders = error || orders.length === 0;
+  const showNoOrders = orders.length === 0;
 
   return (
     <div>

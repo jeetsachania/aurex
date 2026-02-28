@@ -3,7 +3,6 @@ import DashboardNav from "../../components/DashboardNav";
 import Home from "./Home";
 import Trending from "./Trending";
 import Support from "./Support";
-import Wallets from "./Wallets";
 import Settings from "./Settings";
 
 import Logo from "../../assets/svgs/Logo";

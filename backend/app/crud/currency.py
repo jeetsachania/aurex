@@ -1,7 +1,7 @@
 from sqlalchemy.orm import Session
 
-from app.models.wallet import Wallet
-from app.models.currency import Currency
+from backend.app.models.wallet import Wallet
+from backend.app.models.currency import Currency
 
 
 def get_additional_currencies(db: Session, user_id: int) -> list[Currency]:
