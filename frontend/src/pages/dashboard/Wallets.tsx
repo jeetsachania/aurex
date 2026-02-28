@@ -31,7 +31,7 @@ const AddWallet: React.FC<{ onWalletAdded: () => void }> = ({
   React.useEffect(() => {
     if (!open) return;
 
-    fetchWithAuth("http://localhost:8000/currencies/available")
+    fetchWithAuth("api/currencies/available")
       .then((res) => res.json())
       .then((data) => setCurrencies(data))
       .catch(() => toastError("Failed to load currencies"));
@@ -39,7 +39,7 @@ const AddWallet: React.FC<{ onWalletAdded: () => void }> = ({
 
   const handleAddWallet = async (currency: string) => {
     try {
-      const res = await postWithAuth("http://localhost:8000/wallets", {
+      const res = await postWithAuth("api/wallets", {
         currency,
       });
 
@@ -84,7 +84,7 @@ function WalletCard({ currency, balance, onTransactionComplete }: WalletCardProp
   const handleConfirm = async (amount: number) => {
     try {
       const response = await postWithAuth(
-        `http://localhost:8000/wallets/${currency}/${type}`,
+        `api/wallets/${currency}/${type}`,
         { amount },
       );
       if (!response.ok) {
@@ -151,7 +151,7 @@ const Wallets: React.FC = () => {
   const [error, setError] = React.useState(false);
 
   const loadWallets = () => {
-    fetchWithAuth("http://localhost:8000/wallets/list")
+    fetchWithAuth("api/wallets/list")
       .then((res) => {
         if (!res.ok) throw new Error();
         return res.json();

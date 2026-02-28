@@ -4,7 +4,7 @@ async function refreshAccessToken(): Promise<string> {
   const refreshToken = localStorage.getItem("refresh_token");
   if (!refreshToken) throw new Error("No refresh token found");
 
-  const response = await fetch("http://localhost:8000/users/refresh_token", {
+  const response = await fetch("api/users/refresh_token", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ refresh_token: refreshToken }),

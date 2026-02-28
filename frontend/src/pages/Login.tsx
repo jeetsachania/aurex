@@ -16,7 +16,7 @@ const Login: React.FC = () => {
     event.preventDefault();
 
     try {
-      const response = await axios.post("http://localhost:8000/users/login", {
+      const response = await axios.post("api/users/login", {
         username,
         password,
       });
