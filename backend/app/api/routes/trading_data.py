@@ -3,13 +3,13 @@ from typing import List
 from fastapi import APIRouter, HTTPException, Depends, status
 from sqlalchemy.orm import Session
 
-from app.api.deps import get_current_user, role_required
-from app.crud.utils import commit, exists, get, get_all
-from app.db.database import get_db
-from app.models.user import User
-from app.models.asset import Asset
-from app.models.trading_data import TradingData
-from app.schemas.trading_data import TradingDataCreate, TradingDataResponse
+from backend.app.api.deps import get_current_user, role_required
+from backend.app.crud.utils import commit, exists, get, get_all
+from backend.app.db.database import get_db
+from backend.app.models.user import User
+from backend.app.models.asset import Asset
+from backend.app.models.trading_data import TradingData
+from backend.app.schemas.trading_data import TradingDataCreate, TradingDataResponse
 
 
 router = APIRouter()

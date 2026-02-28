@@ -3,12 +3,12 @@ from typing import List
 from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy.orm import Session
 
-from app.api.deps import get_current_user, role_required
-from app.crud.utils import commit, get_all
-from app.db.database import get_db
-from app.models.user import User
-from app.models.asset import Asset
-from app.schemas.asset import AssetCreate, AssetResponse
+from backend.app.api.deps import get_current_user, role_required
+from backend.app.crud.utils import commit, get_all
+from backend.app.db.database import get_db
+from backend.app.models.user import User
+from backend.app.models.asset import Asset
+from backend.app.schemas.asset import AssetCreate, AssetResponse
 
 
 router = APIRouter()

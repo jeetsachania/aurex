@@ -1,7 +1,7 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
-from app.api.routes import users, wallets, currencies, order, assets, trading_data
+from backend.app.api.routes import users, wallets, currencies, order, assets, trading_data
 
 origins = [
     "http://localhost:5173",

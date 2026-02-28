@@ -4,14 +4,14 @@ from typing import List
 from fastapi import APIRouter, Body, Depends, HTTPException, status
 from sqlalchemy.orm import Session
 
-from app.api.deps import get_current_user
-from app.crud.wallet import validate_deposit, validate_withdrawal, validate_delete
-from app.crud.utils import commit, exists, get, get_all
-from app.db.database import get_db
-from app.models.currency import Currency
-from app.models.user import User
-from app.models.wallet import Wallet
-from app.schemas.wallet import WalletResponse
+from backend.app.api.deps import get_current_user
+from backend.app.crud.wallet import validate_deposit, validate_withdrawal, validate_delete
+from backend.app.crud.utils import commit, exists, get, get_all
+from backend.app.db.database import get_db
+from backend.app.models.currency import Currency
+from backend.app.models.user import User
+from backend.app.models.wallet import Wallet
+from backend.app.schemas.wallet import WalletResponse
 
 
 router = APIRouter()

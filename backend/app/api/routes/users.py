@@ -3,15 +3,15 @@ from passlib.context import CryptContext
 from pydantic import BaseModel
 from sqlalchemy.orm import Session
 
-from app.api.deps import get_current_user
-from app.crud.utils import commit, exists, get
-from app.crud.user import assign_role
-from app.db.database import get_db
-from app.db.user_auth import authenticate_user
-from app.models.user import User
-from app.schemas.user import UserRegister, UserResponse, UserLogin, UserEmail
-from app.services.session_auth import create_token, decode_token, token_expired
-from config import settings
+from backend.app.api.deps import get_current_user
+from backend.app.crud.utils import commit, exists, get
+from backend.app.crud.user import assign_role
+from backend.app.db.database import get_db
+from backend.app.db.user_auth import authenticate_user
+from backend.app.models.user import User
+from backend.app.schemas.user import UserRegister, UserResponse, UserLogin, UserEmail
+from backend.app.services.session_auth import create_token, decode_token, token_expired
+from backend.config import settings
 
 
 ACCESS_TOKEN_EXPIRE_MINUTES = settings.ACCESS_TOKEN_EXPIRE_MINUTES

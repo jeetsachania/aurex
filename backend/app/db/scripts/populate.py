@@ -6,9 +6,9 @@ from sqlalchemy import create_engine, text
 from sqlalchemy.exc import IntegrityError
 from sqlalchemy.orm import sessionmaker
 
-from app.models.currency import Currency
-from app.models.asset import Asset
-from app.models.trading_data import TradingData
+from backend.app.models.currency import Currency
+from backend.app.models.asset import Asset
+from backend.app.models.trading_data import TradingData
 
 
 load_dotenv()
