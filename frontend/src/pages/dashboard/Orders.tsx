@@ -1,5 +1,6 @@
 import React from "react";
 
+import { apiBaseUrl } from "../../config/apiConfig";
 import { fetchWithAuth } from "../../api/authFetch";
 import { postWithAuth } from "../../api/authFetch";
 import { formatDateTime } from "../../utils/Utils";
@@ -33,7 +34,7 @@ const AddOrder: React.FC<{ onOrderAdded: () => void }> = ({ onOrderAdded }) => {
 
   const fetchAssets = async () => {
     try {
-      const res = await fetchWithAuth("http://localhost:8000/assets");
+      const res = await fetchWithAuth(`${apiBaseUrl}/api/assets`);
       if (!res.ok) {
         toastError("Failed to fetch assets");
         return;
@@ -69,7 +70,7 @@ const AddOrder: React.FC<{ onOrderAdded: () => void }> = ({ onOrderAdded }) => {
     };
 
     try {
-      const res = await postWithAuth("http://localhost:8000/orders", payload);
+      const res = await postWithAuth(`${apiBaseUrl}/api/orders`, payload);
       if (!res.ok) {
         const errorData = await res.json();
         toastError(errorData.detail);
@@ -110,7 +111,7 @@ const Orders: React.FC = () => {
   
   const fetchOrders = async () => {
     try {
-      const res = await fetchWithAuth("http://localhost:8000/orders");
+      const res = await fetchWithAuth(`${apiBaseUrl}/api/orders`);
 
       if (!res.ok) {
         toastError("Failed to fetch orders");

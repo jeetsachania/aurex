@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import { ToastContainer } from "react-toastify";
 
+import { apiBaseUrl } from "../config/apiConfig";
 import Logo from "../assets/svgs/Logo";
+import { ToastContainer } from "react-toastify";
 import { toastSuccess, toastError } from "../components/ToastNotification";
 
 import {
@@ -64,7 +65,7 @@ const Signup: React.FC = () => {
 
     try {
       const response = await axios.post(
-        "api/users/register",
+        `${apiBaseUrl}/api/users/register`,
         {
           email,
           firstname,

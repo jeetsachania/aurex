@@ -5,7 +5,7 @@ export async function fetchUserInformation(): Promise<any> {
     throw new Error("No access token found");
   }
 
-  const response = await fetch("api/8000/users/information", {
+  const response = await fetch("8000/users/information", {
     method: "POST",
     headers: {
       Authorization: `Bearer ${token}`,
@@ -20,7 +20,7 @@ export async function refreshAccessToken(): Promise<string> {
   const refreshToken = localStorage.getItem("refresh_token");
 
   const response = await fetch(
-    "api/users/refresh_token",
+    "users/refresh_token",
     {
       method: "POST",
       headers: { "Content-Type": "application/json" },

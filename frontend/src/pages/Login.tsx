@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import { ToastContainer } from "react-toastify";
 
+import { apiBaseUrl } from "../config/apiConfig";
 import Logo from "../assets/svgs/Logo";
+import { ToastContainer } from "react-toastify";
 import { toastError } from "../components/ToastNotification";
 
 const Login: React.FC = () => {
@@ -16,7 +17,7 @@ const Login: React.FC = () => {
     event.preventDefault();
 
     try {
-      const response = await axios.post("api/users/login", {
+      const response = await axios.post(`${apiBaseUrl}/api/users/login`, {
         username,
         password,
       });
