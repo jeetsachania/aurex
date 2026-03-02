@@ -1,0 +1,81 @@
+#cloud-config
+
+packages:
+  - git
+  - nginx
+  - nodejs
+  - npm
+  - postgresql
+  - postgresql-contrib
+  - python3-pip
+  - python3-venv
+
+runcmd:
+  - |
+    #!/bin/bash
+    set -e
+
+    # Set app name
+    APP_NAME="aurex"
+
+    # Detect first non-root user
+    USERNAME=$(awk -F: '$3>=1000 && $1!="nobody" {print $1; exit}' /etc/passwd)
+
+    REPO_PATH="/home/$USERNAME/$APP_NAME"
+
+    # Clone repo
+    if [ ! -d "$REPO_PATH/.git" ]; then
+        git clone https://github.com/jeetsachania/$APP_NAME.git "$REPO_PATH"
+        chown -R $USERNAME:$USERNAME "$REPO_PATH"
+    fi
+
+    cd "$REPO_PATH"
+
+    # Setup Python environment and install dependencies
+    python3 -m venv .venv
+    $REPO_PATH/.venv/bin/pip install -r backend/requirements.txt
+
+    # Set up Node.js environment and install dependencies
+    cd frontend
+    npm install
+    FRONTEND_PATH="$REPO_PATH/frontend/dist"
+
+    # Create Nginx config directory
+    mkdir -p $REPO_PATH/deploy/nginx
+
+    # Create Nginx config
+    cat > $REPO_PATH/deploy/nginx/$APP_NAME.conf <<EOF
+    server {
+        listen 80;
+        server_name _;
+
+        root ${FRONTEND_PATH};
+        index index.html;
+
+        location / {
+            try_files \$uri /index.html;
+        }
+
+        location /api/ {
+            proxy_pass http://127.0.0.1:8000/;
+            proxy_set_header Host \$host;
+            proxy_set_header X-Real-IP \$remote_addr;
+            proxy_set_header X-Forwarded-For \$proxy_add_x_forwarded_for;
+            proxy_set_header X-Forwarded-Proto \$scheme;
+        }
+    }
+    EOF
+
+    # Enable Nginx config
+    sudo cp /home/$USERNAME/$APP_NAME/deploy/nginx/$APP_NAME.conf /etc/nginx/sites-available/$APP_NAME.conf
+    sudo ln -sf /etc/nginx/sites-available/$APP_NAME.conf /etc/nginx/sites-enabled/
+    sudo nginx -t
+    sudo systemctl restart nginx
+
+    # Start services
+    sudo systemctl enable postgresql
+    sudo systemctl start postgresql
+    sudo systemctl enable nginx
+    sudo systemctl start nginx
+
+final_message: "Deployment Successful"
