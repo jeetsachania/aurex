@@ -13,7 +13,7 @@ from backend.app.models.trading_data import TradingData
 
 load_dotenv()
 
-DATABASE_URL = os.getenv("DATABASE_URL", "postgresql://dev:test@localhost/aurex")
+DATABASE_URL = os.getenv("DATABASE_URL")
 
 engine = create_engine(DATABASE_URL)
 Session = sessionmaker(bind=engine)
