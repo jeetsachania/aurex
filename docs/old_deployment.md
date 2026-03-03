@@ -1,55 +1,48 @@
-### Deployment
+1. Clone the repository locally
 
-#### Table of Contents
-1. [Local Deployment](#local-deployment)
-    1. [Docker](#docker)
-2. [Remote Deployment](#remote-deployment)
-    1. [Azure](#azure)
+2. Create a new virtual environment and activate it
+    ```
+    python3 -m venv .venv
+    source .venv/bin/activate
+    ```
 
-## Local Deployment
+3. Install the required dependencies found in `/backend/requirements.txt`
+    ```
+    pip install -r aurex/backend/requirements.txt
+    ```
 
-### Docker
+4. Check that the backend runs
+    ```
+    cd /aurex
+    uvicorn backend.app.main:app --reload
+    ...
+    INFO:     Waiting for application startup.
+    INFO:     Application startup complete.
+    ```
 
-1. Ensure you have Docker installed and running locally
-    1. Confirm Docker is installed
-        ```
-        docker -v
-        Docker version <version>, build <build>
-        ```
+5. Setup the frontend
+    ```
+    cd frontend/
+    npm install
+    ```
 
-    2. Confirm that Docker is running
-        ```
-        docker info
-        Client:
-            Version:    <version>
-            Context:    desktop-linux
-            ...
-        ```
+6. Check that the frontend runs
+    ```
+    npm run dev
+    
+    > frontend@0.0.0 dev
+    > vite
 
-2. Clone the repository locally
+    VITE v7.2.2  ready in 241 ms
 
-3. Setup the [environment files](prerequisites.md#environment-files)
+    ➜  Local:   http://localhost:5173/
+    ➜  Network: use --host to expose
+    ➜  press h + enter to show help
+    ```
 
-4. Navigate to the project's root directory via terminal and build the app
-    1. Create and start the Postgres container
-        ```
-        docker-compose up -d db
-        ```
-
-    2. Create and start the `backend` and `web` containers
-        ```
-        docker-compose up -d backend web
-        ```
-    3. Optionally, if you have a `dump` file for the database
-        ```
-        docker exec -i <db-container-name> pg_restore -U dev -d aurex <dump>.dump
-        ```
-
-The backend should now be running on `http://localhost:8000/` with the frontend at `http://localhost/`
+7. Visit `http://localhost:8000`
 
 ## Remote Deployment
-
-### Azure
 
 1. Clone the repository to the VM
 
@@ -94,7 +87,7 @@ The backend should now be running on `http://localhost:8000/` with the frontend 
     npm install
     ```
 
-7. Setup Nginx proxy
+7. Setup NGINX proxy
     ```
     # /etc/nginx/sites-available/aurex
 
@@ -102,7 +95,7 @@ The backend should now be running on `http://localhost:8000/` with the frontend 
         listen 80;
         server_name _;
 
-        root /home/<vm-user>/aurex/frontend/dist;
+        root /home/<db-user>/aurex/frontend/dist;
         index index.html;
 
         location / {
@@ -124,7 +117,7 @@ The backend should now be running on `http://localhost:8000/` with the frontend 
     sudo nginx -t
     ```
 
-9. Restart Nginx
+9. Restart NGINX
     ```
     sudo systemctl restart nginx
     ```
