@@ -4,7 +4,8 @@
 1. [Local Deployment](#local-deployment)
     1. [Docker](#docker)
 2. [Remote Deployment](#remote-deployment)
-    1. [Azure](#azure)
+    1. [Terraform](#terraform)
+        1. [Azure](#azure)
 
 ## Local Deployment
 
@@ -30,7 +31,7 @@
 
 3. Setup the [environment files](prerequisites.md#environment-files)
 
-4. Navigate to the project's root directory via terminal and build the app
+4. Navigate to the project's root directory via a terminal and build the app using Docker
     1. Create and start the Postgres container
         ```
         docker-compose up -d db
@@ -49,87 +50,72 @@ The backend should now be running on `http://localhost:8000/` with the frontend 
 
 ## Remote Deployment
 
-### Azure
+### Terraform
 
-1. Clone the repository to the VM
+#### Azure
 
-2. Create a new virtual environment and activate it
-    ```
-    python3 -m venv .venv
-    source .venv/bin/activate
-    ```
+##### Initial Setup
 
-3. Install the required dependencies found in `/backend/requirements.txt`
+1. Generate a Terraform SSH key
     ```
-    pip install -r aurex/backend/requirements.txt
+    ssh-keygen -t rsa -b 4096 -f <path-to-key>/<key-name> -N " "
     ```
 
-4. Setup the `systemd` service to run FastAPI in the background
+2. Set the SSH key as an environment variable
     ```
-    # /etc/systemd/system/aurex.service
-
-    [Unit]
-    Description=FastAPI app
-    After=network.target
-
-    [Service]
-    User=<vm-user>
-    Group=www-data
-    WorkingDirectory=/home/<vm-user>/aurex
-    Environment="DATABASE_URL=postgresql://<db-user>:<db-password>@localhost:5432/aurex"
-    ExecStart=/home/<db-user>/.venv/bin/gunicorn main:app -w 2 -k uvicorn.workers.UvicornWorker -b 0.0.0.0:8000
-
-    [Install]
-    WantedBy=multi-user.target
+    TF_VAR_terraform_ssh_key_path=<ssh-key>.pub
     ```
 
-5. Test that the backend runs
+3. Set the `Subscription ID` and `Tenant ID` as environment variables using the `setup.sh` script
+    - **Note:** This will ask you to login to Azure
+        ```
+        source setup.sh
+        ```
+
+##### Deployment
+
+1. Adjust the variable names in `/terraform/azure/variables.tf`
+
+2. Initialise Terraform
     ```
-    uvicorn backend.app.main:app --host 0.0.0.0 --port 8000 --reload
+    cd aurex/terraform/azure
+    terraform init
     ```
 
-6. Install frontend depdendencies
+3. Optionally validate the Terraform files
     ```
-    cd frontend/
-    npm install
-    ```
-
-7. Setup Nginx proxy
-    ```
-    # /etc/nginx/sites-available/aurex
-
-    server {
-        listen 80;
-        server_name _;
-
-        root /home/<vm-user>/aurex/frontend/dist;
-        index index.html;
-
-        location / {
-            try_files $uri /index.html;
-        }
-
-        location /api/ {
-            proxy_pass http://127.0.0.1:8000/;
-            proxy_set_header Host $host;
-            proxy_set_header X-Real-IP $remote_addr;
-            proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-            proxy_set_header X-Forwarded-Proto $scheme;
-        }
-    }
+    terraform validate
     ```
 
-8. Check changes
+4. Optionally generate an Execution Plan
     ```
-    sudo nginx -t
+    terraform plan
+
+    Terraform used the selected providers to generate the following execution plan. Resource actions are indicated with the following
+
+    symbols:
+        + create
+
+    Terraform will perform the following actions:
+
+    # azurerm_linux_virtual_machine.project_vm will be created
+        + resource "azurerm_linux_virtual_machine" "project_vm" {
+            + admin_username                                         = "azureuser"
+        ...
     ```
 
-9. Restart Nginx
+4. Apply the Terraform configuration to provision Azure resources
     ```
-    sudo systemctl restart nginx
+    terraform apply
     ```
 
-10. Create a symlink
+5. Verify deployment
     ```
-    sudo ln -s /etc/nginx/sites-available/aurex /etc/nginx/sites-enabled/
+    az group show --name <rg-name>
+    az vm list --resource-group <rg-name> -o table
+    ```
+
+6. Optionally destroy infrastructure
+    ```
+    terraform destroy
     ```
